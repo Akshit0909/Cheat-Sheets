@@ -1,0 +1,71 @@
+EXCEL
+
+ALT + N + V : Pivot Table
+CTR + ~ : SHOW FORMULAS
+ALT + D + E: Text to Columns
+ALT + D + F + S: Clear All Filters
+ALT + SHIFT + L: Filter on selected columns
+CTRL + 1: Formatting
+==========================================================================================
+
+RANGE CONTAINS SPECIFIC TEXT
+=COUNTIF(rng,"*"&value&"*")>0
+==========================================================================================
+
+COUNT OF STRING VALUES IN A COLUMN(NO BLANKS & NO NUMERICS)
+COUNTIF(A:A,"*")
+
+==========================================================================================
+
+COUNT DISTINCT EXCLUDING NULL
+
+SUMPRODUCT & COUNTIF (Excel Course)
+
+==========================================================================================
+
+CLASSIFY DATA BASED ON CELLS THAT CONTAINS A SPECIFIC TEXT
+
+=IF(ISNUMBER(SEARCH(FIND_TEXT,WITHIN_TEXT)),VALUE_IF_TRUE,VALUE_IF_FALASE)
+
+===========================================================================================
+
+HIGHLIGHTING ALTERNATE/ODD ROWS
+
+CONDITIONAL FORMATTING -> FORMULA -> MOD(ROW(),2)=1
+
+==========================================================================================
+
+CONDITIONAL FORMATING BASED ON OTHER VALUES IN EXCEL SHEET
+
+EX: HIGHLIGHT THE CELL WHICH HAS MAX SALARY
+
+SELECT THE ENTIRE COLUMN -> CONDITIONAL FORMATTING -> FORMULA -> $C2=MAX(C:C)
+NOTE: In $C2 numeric part is relative and that's important
+
+If you want to highlght the entire row instead of just one column, just SELECT ALL THE ROWS
+& THEN SAME APPLIES
+
+==========================================================================================
+
+DOUBLE UNARY --
+When we have an array or in normal situations: we want to convert boolean string values (true/false) to 1/0
+
+=========================================================================================
+
+Nth LARGEST VALUE IN A COLUMN
+=LARGE(A:A,2)
+
+=========================================================================================
+
+RAND() will always return a decimal value between 0 and 1
+
+=========================================================================================
+
+MATCH FUNCTION
+
+Since match returns the position of a cell within a one-dimensional range, the result will always 
+be a whole number (if a match is found) or an error (if a match is not found).
+
+========================================================================================
+
+FIND SEARCH ARE SAME EXCEPT FIND IS CASE SENSITIVE

@@ -1,0 +1,62 @@
+GIT
+====================================================================================
+ls -lart #Show all folders including hidden
+git checkout <filename> #Recover previous file (file of last commit)
+git checkout -f ##Recover ALL files (files of last commit)
+
+git diff #compares working directory to staging area
+git diff --staged #compares staging area to last commit
+
+CTRL + C #Cancel command
+
+git rm waste.html #delete file from working directory + staging directory
+git rm --cached waste.html #delete file from staging directory
+
+git log -p -2 #See previous 2 commits
+
+#Short Status
+git status -s #Summary of status
+
+M  contact.html
+ M about.html
+ M monuments.html
+ 
+First box on left: file modified(M) in staging area
+Second box on left: file modified(M) in working directory
+
+
+gitignore
+If I do: logfile.txt #It will not consider it from any subdirectory
+Id I do: /logfile.txt #It will not consider this file where .gitignore file is
+
+Example : Working Directory:
+about.html {log folder}->logfile.text index.html logfile.txt .gitignore
+
+In .gitignore:
+Case 1: logfile.txt -> Not consider both files
+Case 2: /logfile.txt -> Not consider only logfile.text but will consider the log folder now
+
+
+We can also use wildcards: 
+*.log #Not consider all log files
+
+#Ignore a FOLDER
+#Add this command in gitignore
+ignorefolder/
+
+/ tells git that it's a folder
+
+
+#Make new branch
+git branch newbranch
+
+#Switch to new branch
+git checkout newbranch
+
+#Make new branch & Switch to it in once command
+git checkout -b newbranch
+
+
+#Meaning of git push -u origin master
+If we do "-u" then we don't have write the entire "git push origin master" again
+We can just do "git push" and it will take our remote repo(origin) and master(branch) from the last time we did -u

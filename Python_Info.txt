@@ -1,0 +1,1415 @@
+PYTHON LINKS
+
+============================================================================================================
+
+SHORTCUTS
+
+H: Show SHORTCUTS
+
+===JUPYTER:
+(Select Cell &)
+C: Copy Cell
+V: PASTE CELL
+A: INSERT CELL ABOVE
+B: INSERT CELL BELOW
+D+D: DELETE CELL
+M: ENTER MARKDOWN STATE
+Y: ENTER CODE STATE
+
+--- or *** or ___: ENTER A LINE (MARK DOWN MODE)
+Formatted line? <hr style="border:2px solid gray"> </hr>
+
+=============================================================================================================
+PARSE EMAIL .MSG FILES
+
+import extract_msg
+
+f = r'Mail2.msg'  //Your file Name
+msg = extract_msg.Message(f)
+msg_sender = msg.sender
+msg_date = msg.date
+msg_subj = msg.subject
+msg_message = msg.body
+
+print(msg_date)
+print('Sender: {}'.format(msg_sender))
+print('Sent On: {}'.format(msg_date))
+print('Subject: {}'.format(msg_subj))
+print('Body: {}'.format(msg_message))
+=============================================================================================================
+List of immutable types:
+int, float, decimal, complex, bool, string, tuple, range, frozenset, bytes
+
+List of mutable types:
+list, dict, set, bytearray, user-defined classes
+
+=============================================================================================================
+DATAFRAME INFO
+
+Column Information: df.info()
+Column Stats/Summary: df.describe() | df.describe().transpose()	
+=============================================================================================================
+
+DICTIONARY
+
+Accessing key, value in a dictionary
+
+// This prints the keys
+for i in dict:
+	print(i)
+	
+//This prints the key & VALUE
+
+for k,v in dict.items():
+	print(f"{k} : {v}")
+=============================================================================================================
+
+GET ASCII VALUE OF A CHARACTER
+ord("m")=109
+
+=============================================================================================================
+LIST COMPREHENSION
+
+WITH IF ELSE:
+
+mylist=[x*2 if condition else x for x in somelist]
+
+Even though there is a valid form:
+
+[a for i in items if C]
+
+But that isn't the same as that is how you filter by C, but they can be combined:
+
+[a if tC else b for i in items if C]
+
+
+Nested Loop List Comprehension 
+combinedlist=[]
+for i in range(0,x+1):
+    for j in range(0,y+1):
+        for k in range(0,z+1):
+            if i+j+k!=n:
+                mylist=[i,j,k]
+                combinedlist.append(mylist)
+
+
+IS SAME AS
+
+combinedlistnew=[[i,j,k] for i in range(0,x+1) for j in range(0,y+1) for k in range(0,z+1) if i+j+k!=n]
+
+#SECOND EXAMPLE
+
+>>> results = []
+>>> for x in [1, 2, 3]:
+...     for y in [4, 5, 6]:
+...         results.append([x, y])
+... 
+>>> print(results)
+[[1, 4], [1, 5], [1, 6], [2, 4], [2, 5], [2, 6], [3, 4], [3, 5], [3, 6]]
+
+IS SAME AS 
+
+print([[x, y] for x in [1, 2, 3] for y in [4, 5, 6]])
+
+=============================================================================================================
+
+'r' in file path explanation
+
+The r prefix on strings stands for “raw strings”.
+
+Standard strings use backslash for escape characters:
+
+“\n” is a newline, not backslash-n
+
+“\t” is a tab, not backslash-t
+
+“\u03C0” is the Greek letter pi, π, not backslash-u-zero-three-c-zero
+
+and so forth. If you want to use backslashes in Windows pathnames, you
+
+need to escape them by doubling:
+
+wbkName = '\\AA\\chart.xlsx'
+Alternatively, you can use raw strings, which switches off almost all
+
+of the escape character processing:
+
+wbkName = r'\AA\chart.xlsx'
+or finally, and this is generally the recommended way, you can just use
+
+forward slashes, since Windows will accept them as well:
+
+wbkName = '/AA/chart.xlsx'
+
+===========================================================================================================
+In Filtering series & | works NOT AND OR
+
+c1=df_temp['DESCRIPTION'].str.match(pat=r'ISIN|IS INf')
+c2=df_temp['DESCRIPTION'].str.match(pat=r'CUSIP')
+
+df_temp[c1 | c2]
+
+Filter out null/Empty values from data frame
+
+empty df[df['column'].str.len()>0]
+null df[~df['column'].isnull()]
+null df[df['column']!="null"]
+
+
+dataFrame.loc[<ROWS RANGE> , <COLUMNS RANGE>]
+
+dataFrame.iloc[ROW NUMBER][COLUMN NUMBER]
+
+
+
+iloc vs row in for loop 
+
+previous value & next value in python: SHIFT
+NOTE: We can't use apply function or list comprehension to make new column in a DF because these methods access one
+value at a time & there is no previous value when we apply it to a single value
+we need to apply this function to a SERIES
+thats why we use WHERE
+
+============================================================================================================
+
+FILTERING OUT NULL ROWS
+
+1. SIMPLE WAY
+df.dropna() By default: how='any' so it will remove all rows even if it finds ONE NULL VALUE
+
+2. BASED ON A COLUMN/S 
+
+df.dropna(subset=['column1','column2'])
+df[df['column'].notnull()]: will keep non null rows based on a column
+
+3.
+
+df.dropna(thresh=2): This keeps rows with 2 or more non-null values.
+In other words rows with AT LEAST 2 NON NULLS values will be KEPT
+
+df.dropna(df.shape[1]-2): This filters out rows with 2 or more null values.
+
+
+
+WE CAN ALSO COMBINE ABOVE 2
+df = df.dropna(subset=['col1', 'col2', 'col3'], thresh=2)
+
+=============================================================================================================
+LOC ILOC
+	
+LOC: FILTERING rows & SELECTING columns by LABELS
+LABLES mean: ROW by INDEX & columns by COLUMN NAMES
+
+df.loc[Rows you want, Columns you want]
+
+df.loc[0] is SAME AS df.loc[0,:] //RETURNS FIRST ROW WITH ALL COLUMNS
+
+df.loc[0:2,:] returns 3 ROWS
+0:2 in INCLUSIVE OF 2
+
+df.iloc[0:2,:] returns 2 ROWS
+0:2 in EXCLUSIVE OF 2
+
+ILOC: FILTERING rows & SELECTING columns by INTEGERS
+INTEGERS mean: ROW by INDEX & columns by INDEX
+
+FILTERING WITH LOC
+
+df.loc[df.Sex=='male','Name'] //Returns column Name with all rows that have male as sex
+
+
+IX is a mix of loc & iloc //DONT USE IT
+
+df.ix[rows,columns]
+We can enter both labels & integers BUT
+rows arg will ALWAYS BE INCLUSIVE AS ITS TREATED AS A LABEL
+columns arg will ALWAYS BE EXCLUSIVE AS ITS TREATED AS A INTEGER
+===============================================================================================================
+GENERATE SUMMARY & MAKE MULTI INDEX COLUMNS TOP SINGLE INDEX
+
+
+//Create a summary; Also a hack to fetch columns by index rather than name
+grouped_df=df_sod_conflicts.groupby(df_sod_conflicts.columns[0:2].tolist())
+
+//Just make a normal summary; Now reseting index will move the columns from index to columns
+grouped_df=grouped_df.agg(['count']).reset_index()
+
+//Take values from FIRST LEVEL & just put them as Columns Names
+grouped_df.columns=grouped_df.columns.get_level_values(0)
+
+grouped_df
+grouped_df
+
+================================================================================================================
+
+PICK SPECIFIC ITEMS FROM A LIST
+
+19.7 usec: [ myBigList[i] for i in [87, 342, 217, 998, 500] ]
+
+20.6 usec: map(myBigList.__getitem__, (87, 342, 217, 998, 500))
+
+22.7 usec: itemgetter(87, 342, 217, 998, 500)(myBigList)
+
+24.6 usec: list( myBigList[i] for i in [87, 342, 217, 998, 500] )
+
+=================================================================================================================
+
+
+MULTIPLE FILTER CONDITIONS IN A DF
+
+df[(df['column1']=='A') & (df['column2']=='B')]
+
+Always apply paranthesis in conditions to avoid error
+
+FILTER MULTIPLE VALUES USING PANDAS
+
+country_list = ['brazil','poland','russia','countrydummy','usa']
+
+filtered_df = df[df['Country Name'].isin(country_list)]
+
+================================================================================================================
+
+CONTAINS AS FILTER
+
+df[df['column'].str.contains('IO')]
+
+================================================================================================================
+
+INPUT & PRINT STRINGS
+
+name='Akshit'
+print(f'Hello, {name}')
+
+OR 
+
+name='Akshit'
+greeting='Hello, {}'.format(name)
+
+long_phrase="Hello, {}. Today is {}"
+formatted=long_phrase.format("Rolf","Monday")
+
+f'number is {number:.2f}': Outputs as float 2 decimals 
+
+=================================================================================================================
+
+LIST TUPLES SET
+
+LIST []: Can be changed, preserve order
+TUPLES (): Can't be changes(Add/remove elements) , preserve order
+SET{}: Can be changed but no duplicates allowed, don't preserve order
+
+LIST & TUPLES: Can access elements, l[0] t[0]
+SETS: Can't access elements
+
+
+Art={"A,"B","C","D"}
+Science={"E","B","C","F"}
+
+Art only= Art.difference(Science): A D
+Science only= Science.difference(Art): E F 
+All=Art.union(Science): A B C D E F
+Both=Art.intersection(Science): B C
+
+IN KEYWORD: if user_input in ('y','Y'):
+
+=================================================================================================================
+SETS: NO DUPLICATES
+
+A set is created by using the set() function or placing all the elements within a pair of curly braces.
+Iteration for loop:
+
+if "corey" in list:
+	print("found")
+big o(n) : list
+big o(1) : set
+ 
+Days=set(["Mon","Tue","Wed","Thu","Fri","Sat","Sun"])
+Months={"Jan","Feb","Mar"}
+
+CAVEAT: We can't create an empty set by doing {}
+s= {} WRONG
+s= set() RIGHT
+
+s={1,2,3,1,2}
+This will only store {1,2,3}
+
+#Add
+s.add(4)
+
+#Add multiple values
+s.update([5,6,7])
+
+#Remove
+s.remove(11) #If we remove a value that doesn't exist, it gives out a key error
+
+#Discard
+s.discard(11) #If we remove a value that doesn't exist, it DOESN'T give any error
+
+s1.intersection(s2) #common elements in both sets
+s1.difference(s2) #Elements in set s1 that are NOT in set s2	
+s1.symmetric_difference(s2) = s2.symmetric_difference(s1) #All elements in both sets that are not in common with each other
+
+##USE CASE 1 : Remove duplicated from a list
+l1=[1,2,3,1,2,3]
+l2=list(set(l1)) #will give [1,2,3]
+
+##USE CASE 2 : Employees in a company that are neither gym_members nor developers
+result= set(employees).difference(gym_members,developers)
+
+
+
+
+================================================================================================================
+
+FUNCTION ARGS/ARGUMENTS
+
+BY DEFAULT THE FUNCTION RETURNS "None"
+
+
+We can have positional arguemnts, keyword arguments, a mix of them(but only in one direction)
+
+def myadd(x,y):
+	print(x+y)
+	
+myadd(2,y=4) IS CORRECT
+
+myadd(x=2,3) in INCORRECT : POSITIONAL ARGUMENT CANNOT FOLLOW KEYWORD ARGUMENT
+
+
+DEFAULT VALUE:
+
+def myadd(x,y=3):
+	print(x+y)
+	
+myadd(2) will print 5
+myadd(2,6) will print 8
+
+=================================================================================================================
+
+UNPACK VARIABLES (* & _)
+
+mytuple=('A','B','C')
+var1,_,var2=mytuple
+//Nothing will be assigned to B, underscore is a dummy name
+
+mylist=[1,11,12,13]
+head,*rest=mylist
+// will result in head=1 & rest=[11,12,13]
+
+=================================================================================================================
+
+WHY ARE STRINGS IMMUTABLE IN PYTHON
+
+a="hello"
+
+What happens? An object "hello" is created in memory and it's NAME is "a"
+
+a= a + "world"
+
+What happens? A NEW object "hello world" is created in memory & now it's NAME is "a"
+
+"hello" string NEVER changed, it just doesn't have the name "a" anymore
+so STRINGS ARE IMMUTABLE AS THEY NEVER CHANGE, the name to their object reference can change but not the STRINGS
+
+=================================================================================================================
+
+OR KEYWORD
+
+OR Keyword takes the second argument if first is null
+
+def greet():
+	print(f"Hello, {username or 'World'}")
+	
+If username variable is empty then it will print: Hello World
+If it's 'Akshit is username, it prints: Hello Akshit
+
+===================================================================================================================
+
+TKINTER
+
+====Difference between tk & tkk
+
+That is the real difference between the two: Tkinter widgets are more configurable, and ttk is more modern and it is 
+configurable with styles which are really handy shortcuts. And Tkinter is like the core of the window and ttk is styling. 
+Think of it like this:
+
+Tkinter --- HTML, ttk --- CSS, Python --- JavaScript.
+
+tkk is more modern & smoother looking & tk is native
+We can also use both
+
+
+==== pack in new line
+
+THIS IS CORRECT
+text=tk.Text(root,height=8)
+text.pack()
+
+THIS IS WRONG
+text=tk.Text(root,height=8).pack()
+
+Here, we're assigning to text variable the result of calling this function pack() which returns 'None'
+
+==== UPDATE PROPERTIES OF ALL OBJECTS
+
+//winfo_children returns all widget objects in window/frame
+for children in root.winfo_children():
+    children.grid_configure(padx=50,pady=50)
+	
+==== Aligment pf text within widgets
+	
+By default, the text in a label is centered in the label. You can control this with the anchor attribute, 
+and possibly with the justify attribute. justify only affects the text when there is more than one line of text in the widget.
+
+For example, to get the text inside a label to be right-aligned you can use anchor="e":
+
+a=Label(root,text='Hello World!', anchor="e")
+
+
+==== PADDING IN ONE DIRECTION
+
+Yes, you can set the pad using a tuple like:
+
+label2.grid(column=0, row=1, pady=(15,0))
+
+=====================================================================================================================
+
+GLOBAL VARIABLES
+
+A variable declared in the main area(outside) is a GLOBAL variable
+a=5
+
+A variable declared inside a function is LOCAL variable that is it's scope is limited to that function
+
+def dosomething():
+	a=4
+	print(a)
+	
+These two a's are stored separately in memory as their value is different
+if i print(a) outside function it will print 5
+
+What if I want to access the a=5 variable inside the function? I will use the GLOBAL keyword
+
+a=5
+def dosomething():
+	global a
+	a=4
+
+print(a)
+
+will print 4 now. Now there is only 1 variable in the memory
+
+
+
+=======================================================================================================================
+
+CHANGE/RENAME COLUMNS NAMES
+
+df2 = df.rename({'a': 'X', 'b': 'Y'}, axis=1)  # new method
+df2 = df.rename({'a': 'X', 'b': 'Y'}, axis='columns')
+df2 = df.rename(columns={'a': 'X', 'b': 'Y'})  # old method  
+
+Remember to assign the result back, as the modification is not-inplace. Alternatively, specify inplace=True:
+
+df.rename({'a': 'X', 'b': 'Y'}, axis=1, inplace=True)
+
+=======================================================================================================================
+
+
+DELETE FUNCTIONS IN PYTHON
+
+If I make a function & COMMENT IT OUT
+It will still run because it's still there in memory
+
+In Python, everything is an object so I have to do
+del function 
+to delete it
+
+=======================================================================================================================
+
+PASSING MULTIPLE ARGUMENTS TO SAME FUNCTION
+
+If I want to make a function with 5 arguments and in 1 call I want to use only 2 & in second call I want to use 5
+
+def somefunction(a,b,c,d,e):
+
+First call: function(2,4,None,None,None)
+Second call: function(2,4,2,5,6)
+
+========================================================================================================================
+
+DELETE COLUMNS FROM A DATAFRAME
+
+del df['column]
+
+DELETE MULTIPLE COLUMNS
+
+columns = ['Col1', 'Col2', ...]
+df.drop(columns, inplace=True, axis=1)
+
+DELETE BY INDEX
+
+Delete first, second and fourth columns:
+df.drop(df.columns[[0,1,3]], axis=1, inplace=True)
+
+
+INSERT COLUMN AT SPECIFIC POSITIONAL
+
+df.insert(pos,column name,value)
+df.insert(0,'Commodity','Iron Ore')
+
+========================================================================================================================
+
+None is detected by isnull()
+If string is entered as None in data, it won't be included in NULLS
+
+
+========================================================================================================================
+
+ORDER MATTERS when joining mutiple tables
+Eg table1 has A,B,C
+table2 has A,B,C
+
+pd.merge(table1,table2,left_on=['A','B'],right_on=['A','B'],how='inner') WILL WORK
+pd.merge(table1,table2,left_on=['A','B'],right_on=['B','A'],how='inner') WILL NOT WORK
+
+=======================================================================================================================
+
+DROP COLUMNS
+
+df.drop(['C', 'D'], axis = 1,inplace=True)
+
+=======================================================================================================================
+
+CONVERT STRING TO LIST
+'Akshit' to ['Akshit']
+mystr = 'example'
+lst = [mystr]
+
+
+=======================================================================================================================
+
+REMOVE EMPTY VALUES FROM A LIST
+
+====WAY 1
+mylist=[" ","a","b"," ","c"]
+output -> ["a","b","c"]
+
+" Akshit Miglani".split(" ") will give [" ","Akshit","Miglani"]
+" Akshit Miglani".split() will give ["Akshit, "Miglani"]
+
+WHY?
+If sep is not specified or is None, a different splitting algorithm is applied: runs of consecutive whitespace are regarded as a 
+single separator, and the result will contain no empty strings at the start or end if the string has leading or trailing whitespace.
+
+This is what is useful
+
+" ".join(mylist1) gives "a b  c"
+Then " ".join(mylist1).split() gives ["a","b","c"]
+
+
+====WAY 2
+while("" in mylist) : 
+    mylist.remove("") 
+
+=========================================================================================================================
+
+MAGIC COMMANDS
+%(inline) or %%(multiple lines)
+
+==== %ls magic
+see all magic commands
+
+==== %ls
+see all files in the current directory
+
+==== %timeit
+o/p: 615 ns ± 18.9 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+
+The command line interface first will try to find a suitable number of tests; it starts with 10 runs, scales that up by a factor of 10 
+until the total time taken exceeds 0.2 seconds. If it prints 10000 loops, then that was the number of loops that takes 0.2 seconds or more.
+
+The 3 is the repeat count; the tests are repeated several times, with --repeat defaulting to 3. The fastest time of those 3 is then taken.
+
+Then the total time for the fastest run is divided by the test number.
+
+IPython has their own %timeit command based on all this, but they abbreviated further and use s, ms, us and even ns if your code was fast enough
+to require a nanosecond unit size. The us microsecond unit can also be displayed as µs if your terminal allows it
+s, ms, us & ns(all go down as 1000s) 1 s= 1000 ms
+
+==== %pwd
+see directory of jupyter notebook
+
+====%chdir
+os.chdir(path)
+
+====%remove
+os.remove() removes a file.
+
+os.rmdir() removes an empty directory.
+
+shutil.rmtree() deletes a directory and all its contents.
+
+==========================================================================================================================
+CREATE INDEX COLUMN
+
+df['new_col'] = range(1, len(df) + 1)
+
+OR 
+
+df = df.reset_index(index=True)
+df.columns[0] = 'New_ID'
+
+===========================================================================================================================
+
+GET DIRECTORY & CHANGE DIRECTORY
+
+See current path: os.getcwd()
+Change Directory: os.chdir(NEW_PATH)
+
+==========================================================================================================================
+
+SUBSTRING CONTAINED IN STRING
+
+===IN
+
+"foo" in "foobar"
+True
+
+"foo" in "Foobar"
+False
+
+"foo" in "Foobar".lower()
+True
+
+"foo".capitalize() in "Foobar"
+True
+
+"foo" in ["bar", "foo", "foobar"]
+True
+
+"foo" in ["fo", "o", "foobar"]
+False
+
+["foo" in a for a in ["fo", "o", "foobar"]]
+[False, False, True]
+
+===FIND (returns position)
+
+string.find("substring")
+
+
+==============================================================================================================================
+
+STRING NONE SHORTCIRCUIT CONCEPT:
+
+===Situation
+
+if None in 'some string':
+  pass
+  
+This is what causes your error
+It's meaningless to search for None in a string
+
+===Concept
+
+print(
+  bool('A string'),
+  bool(''),
+  bool(None)
+)
+
+OUTPUT: True, False, False
+None and an empty string are falsy, and a non-empty string are truthy
+
+CHECK IF STRING IS EMPTY
+
+The most elegant way would probably be to simply check if its true or falsy, e.g.:
+
+if not my_string:
+
+
+
+===Solution
+String shortcuits AND
+
+It means it stops evaluation at the AND. Take for example:
+
+my_var = False
+
+
+if my_var and "a" in "abc":
+
+that it will not evaluate "a" in "abc", because it already found a False value, and it know that False and anything will already be false
+we can't do something like:
+
+if a in "abc"
+
+If a is None, so we put the None check first so that code doesn't run and cause an error
+
+
+=====================================================================================================
+Passing different arguments to a function
+
+===SET DEFAULT ARGUMENT AS None
+my_function(a=None,b=None,c=None):
+	do somthing
+	
+my_function('hi')
+my_function('hi','hello')
+my_function('hi','hello','hey')
+
+====================================================================================================
+
+DOWNLOAD PDF FROM WEB URL
+
+import urllib.request
+urllib.request.urlretrieve(url, "filename.pdf")
+
+=====================================================================================================
+
+OS.PATH.JOIN
+
+os.path.join("/home/build/test/sandboxes/","Images") : Output /home/build/test/sandboxes/Images
+os.path.join("/home/build/test/sandboxes/","/Images") : Output /Images
+
+WHY?
+
+The latter strings shouldn't start with a slash. If they start with a slash, then they're considered an "absolute path" 
+and everything before them is discarded.
+
+MOREL:
+The idea of os.path.join() is to make your program cross-platform (linux/windows/etc).
+Even one slash ruins it.
+
+So it only makes sense when being used with some kind of a reference point like os.environ['HOME'] or os.path.dirname(__file__).
+
+=====================================================================================================
+
+BEAUTIFUL SOUP WEB SCRAPING
+
+==SEARCHING TAGS THAT HAVE NO ATTRIBUTES
+
+You can search for tags that don't have a specific attribute, by specifying None as a value for it. So:
+
+>>> td_al_center = soup.find_all('td', {'align': 'center', 'valign': None})
+
+Nested Tags :
+for i in soup.select('div > div'):
+
+======================================================================================================
+
+ADVANCED STRIP METHOD
+
+Year=(2011)
+Year.strip("()") will give 2011
+
+
+=========================================================================================================
+
+HTML SPAN VS DIV
+
+The 'span' is an element used to group other elements without separating them from the rest of the content. 
+If we use div instead, the text inside it would be placed on a new line, isolated from the rest of the text. 
+(span is an inline element, div is a block element)
+
+=========================================================================================================
+
+Replace STRING WITH ANOTHER STRING
+
+2020 March -> 2020_march
+mystring.replace(" ", "_")
+
+==========================================================================================================
+
+GET VALUE FROM A CELL OF A DF
+
+val = df.loc[df.wd==1, 'col_name'].values[0]
+
+=========================================================================================================
+
+repr(String)
+
+==========================================================================================================
+
+"Sep" and "End" arguments in print function
+
+end and sep are optional parameters of Python. The end parameter basically prints after all the output objects
+ present in one output statement have been returned. the sep parameter differentiates between the objects.
+
+EXAMPLE:
+
+a=2
+b='abc'
+print(a,b,sep=',')
+print(a,b,end=',')
+
+OUTPUT:
+
+2,abc
+2 abc,
+
+============================================================================================================
+
+WEB SCRAPING ISSUE
+
+Local Variable Referenced Before Assignment
+
+Spent a long time on this to find out that the HTML was not getting parsed from the Beautiful Soup Request
+Dumped the HTML at every iteration to see why it's not happening.
+
+CODE:
+
+def do_something(match_string):
+  url_link="some_link"
+  soup_object="made using the above link every time"
+  for i in soup_object.find_all("td"):
+    print("inside loop") #This line never executes SECOND time
+    if i.text.split("-")[0]==match_string:
+      second_link=i.find("a").get("href").split("../")[2]
+  return url_link+second_link #Error comes at the line
+
+some_dict={"1":"A,B,C,D,E","2":"A"}
+for i in some_dict:
+  for j in some_dict.get(i).split(","):
+      var2=j
+      do_something(var2)
+
+HTML:
+Error 429 You have received this notification because this IP address is querying the kslegislature.org website at a high rate.  
+If the queries are generated by an automated tool, please introduce a delay rate of 3-5 seconds between queries
+
+LEARNING: Dump the HTML at every step to see what's happening. Also try to minimize the requests/hits to a website or in worst case
+add a time.sleep(10) in every iteration.
+
+
+===========================================================================================================
+
+PYTHON ORDER OF EXECUTION:
+
+It happens from TOP to BOTTOM
+
+There is no point of using __name__=='__main__': in a file that won't be imported anywhere.
+Use of __main__ : and that's really what this condition is all about
+you're checking if you're running the module directly or importing it
+it's not a "block", it's just a condition outside of a function
+same rules apply everywhere in python, you can't use something you haven't declared first
+so usually you declare your functions, and then you call them
+that's why the if __name__ == '__main__': usually appears at the bottom
+
+
+print("Outside")
+if __name__=='__main__':
+    print("main loop")
+	var=6
+	
+	
+Concept 1: Outside will be executed first
+Concept 2: var is a GLOBAL variable unless it creates a NEW SCOPE
+(here var is a global variable)
+
+============================================================================================================
+
+Folder DIRECTORY
+C:/Users/A
+			->B
+ 
+In A: I have main.py
+In B: I have path_try.py
+
+path_try.py
+import os
+from os import path
+
+def printt():
+	absolute_dir=os.path.abspath(path.dirname("__file__"))
+	print(absolute_dir)
+
+
+main.py
+from B.path_try import *
+
+OUTPUT: C:/Users/A
+
+WHY? The path is returned BASIS WHERE IT's CALLED FROM NOT WHERE THE SCRIPT IS
+
+==============================================================================================================
+
+Pyinstaller
+
+Run a command -> Spec File is Created -> Add one line code at top of spec file -> Run Spec file
+Add Icon:
+How to include files in the temp folder:
+Difference between access files in temp and in local:
+Hide Chrome Console
+
+Step 0: Go to the folder where py file is located
+Step 1: pyinstaller STAT_Investement_vF01.py --onefile --add-data "State_Files;State_Files" --windowed --icon=eylogo.png
+		
+		--add-date "folder that exists on your local system;folder name that you want to create in the temp folder"
+		
+		NOTE: --windowed is to hide the console window that pops up and shows the outputs/logs
+		Doing windowed=True or console=False will do the same thing
+
+		A second way to hide the console window is to change the file extension name to .pyw
+		CAUTION: That only works if you already have python installed on your computer...most people don't.
+		
+Step 2: It will generate a spec file with same name 
+		NOTE : PyInstaller relies on a spec file to tell it how to package your program. By default, you just give it the 
+			   directory of your source files and it will look at your imports to determine what the dependencies are and 
+			   generate a spec file for you.
+			   
+		Command Prompt will tell you to add one line in the spec file and then run the spec file
+		import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)
+		
+		Command: pyinstaller STAT_Investement_vF01.py
+		
+
+NOTE: If we have a situation where we have main.py and in folder STATE_FILES we have 9-10 other files/modules which main.py uses
+	  Pyinstaller automatically takes into consideration all the dependant files so we don't need to use "_MEIPASS"
+	  For the files that we want to keep dynamic Just locate the path in the code using the below logic:
+	  
+	  
+	  
+	  absolute_dir=os.path.abspath(path.dirname("__file__"))
+	  bundle_dir=getattr(sys,"MEIPASS",absolute_dir) //Use this statement if you want to locate the _MEIPASS(location to TEMP)
+	  (pyinstaller unpacks your data into a temporary folder, and stores this directory path in the _MEIPASS environment variable.
+	   it is quite useful when you have some resource files (like .bmp .png) to load in your python one-file-bundled app.)
+	  input_path=path.join(absolute_dir,"Assets","STAT Automation Input.xlsx
+	  
+
+
+ICON ERROR: Convert .png to .ico using https://image.online-convert.com/convert-to-ico 
+	  
+	  
+=================================================================================================
+
+PYTHON INSTALl
+
+C:\Users\Akshit.Miglani\AppData\Local\Programs\Python\Python39
+
+
+Right click THIS PC -> Advanced System Settings -> Advanced -> Environment Variables -> Create a new path PYTHON_HOME in top window
+Paste the above path
+Then In the "Path" section in botttom window add -> %PYTHON_HOME%
+
+How I Solved my issue: I went to Python Installer -> Modify -> Check on add python to environment path -> DONE
+
+Anaconda Command Prompt & Normal Command Prompt: 
+A virtual environment (or venv) is a special type of install of Python. It allows you to run different sandboxed 
+environments with different setups (usually means packages) without modifying the root Python files on your OS.
+
+It's like having multiple pairs of shoes. Some you might use to run in, some you go to work in, others to lounge around in. 
+Their goal is to make your life easier, rather than having a bulky set of boots with random decals you use to go everywhere in.
+
+Sublime likely has a different venv than your Jupyter Notebook, so any installs in that particular sandbox won't carry over to Sublime.
+
+
+Oh ok ok, here's what happened,
+Your previous anaconda / Jupyter notebook combo had it's own separate python install with it's own libraries, stuff that the base python install (the one you downloaded from python.org) doesn't have, right?
+Sublime reads directly from the root (the base python install), so since nothing was there, it had only the base install to use
+
+=====================================================================================================
+
+Open Paranthesis Problem in Sublime Text 3:
+
+The reason this happens is that it is part of the default keymap in Jedi. Open Packages > Package Settings > Jedi > Keymap - Default and 
+either comment out or remove the below section:
+
+{"command": "sublime_jedi_params_autocomplete", "keys": ["("],
+    "context": [
+       {"key": "selector", "operator": "equal", "operand":  "source.python - string - comment"},
+       {"key": "selection_empty", "operator": "equal", "operand": true, "match_all": true},
+       {"key": "following_text", "operator": "regex_match", "operand": "^($| )", "match_all": true}
+    ]
+},
+
+=====================================================================================================
+Remove rectangular Lines from Sublime Text 3
+
+1. control + shift + p or cmd + shift + p and type sublimelinter and click the one with disable
+
+2. It can be due to Anaconda as well, to disable it, use cmd + shift + p or control + shift + p, in the drop down menu,
+ there will be an option, 'Anaconda: Disable linting on this file
+
+
+======================================================================================================
+TKINTER Entry vs Text
+
+ENTRY: Single line text
+TEXT: Multi Line (Can even embed images/other objects in this)
+
+======================================================================================================
+
+Logical Operators in Python
+
+==
+!= <>
+>
+<
+>=
+<=
+and
+or
+not
+
+=======================================================================================================
+
+REVERSE STRING
+
+string[::-1]
+from:to:step
+
+=======================================================================================================
+ARRAYS IN PYTHON
+
+There are 2 types of Arrays: Built In Arrays & Numpy ARRAYS(much more versatile,flexible & better)
+
+np.array(list)
+
+Array over Lists:
+
+1. Arrays are homogenous(only one data type)
+2. When you create a slic of an array, you're not creating a new array. You're working with that same old array by creating its view
+(why does that happen: that's the way python/numpy protects the memory of computer)
+
+	In case of list, it creates a copy of list every time
+
+a is a numpy array
+array([1,2,3,4,5])
+b=a[2:4]
+b[:]=111
+
+a will be now [1,2,111,111,5]
+
+Solution
+b=a.copy() //allocates different memory instead of creating a view of that array	
+
+====================================================================================================
+
+DISCORD CODE DOC: !code
+```py
+
+```
+
+`py `
+	
+====================================================================================================
+PYTHON FUNCTION DEFAULT PARAMERE
+
+def some_function(a=5):
+	print(a+5)
+	
+some_function()
+result:10
+
+
+=====================================================================================================
+
+GET VALUE FROM TKINTER TEXTBOX
+
+To get Tkinter input from the text box, you must add a few more attributes to the normal .get() function. 
+If we have a text box myText_Box, then this is the method for retrieving its input.
+
+def retrieve_input():
+    input = self.myText_Box.get("1.0",tk.END)
+The first part, "1.0" means that the input should be read from line one, character zero (ie: the very first character). 
+END is an imported constant which is set to the string "end". The END part means to read until the end of the text box is reached. 
+The only issue with this is that it actually adds a newline to our input. So, in order to fix it we should change END to end-1c 
+The -1c deletes 1 character, while -2c would mean delete two characters, and so on.
+
+def retrieve_input():
+    input = self.myText_Box.get("1.0",'end-1c')
+	
+===================================================================================================
+
+VALUE ERROR TYPE CONVERSION
+
+The following are totally acceptable in python:
+
+passing a string representation of an integer into int
+passing a string representation of a float into float
+passing a string representation of an integer into float
+passing a float into int
+passing an integer into float
+But you get a ValueError if you pass a string representation of a float into int, or a string representation of anything but an integer (including empty string). If you do want to pass a string representation of a float to an int, as @katyhuff points out above, you can convert to a float first, then to an integer:
+
+>>> int('5')
+5
+>>> float('5.0')
+5.0
+>>> float('5')
+5.0
+>>> int(5.0)
+5
+>>> float(5)
+5.0
+>>> int('5.0')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: invalid literal for int() with base 10: '5.0'
+>>> int(float('5.0'))
+5
+===================================================================================================
+
+ACCESSING INDIVIDUAL ELEMENTS/SINGLE VALUE FROM DATAFRAME .at() .iat()
+
+
+.at (for labels, even integer is treated as a label)
+.iat (for integer location)
+
+stats.iat[3,4] #Value at 3rd row, 4th column
+stats.at[row,column]
+stats.at[2,'Country']
+
+INDEX COUNTRY
+0		IN
+2		CH
+4		US
+6		LB
+
+df.iat[2,0] : Output: US
+df.at[2,'COUNTRY'] : Output: CH
+
+.iat looks for INDEX (count from 0,1,2,3,4)
+.at looks for label '2' in INDEX
+==================================================================================================
+
+MAKING DATAFRAME OUT OF LISTS
+
+Country_Name=["India","South Africa","USA"]
+Country_Code=["IN","SA","US"]
+Salary=[200,100,500]
+
+Way1:
+
+country_data=pd.DataFrame({
+							"Name":np.array(Country_Name),
+							"Code":np.array(Country_Code),
+							"Salary":np.array(Salary),
+							})
+							
+Way2:
+
+country_data=pd.DataFrame(dict(zip(["Name","Code","Salary"],[Country_Name,Country_Code,Salary])))
+===================================================================================================
+CHANGING CATEGORY FIELDS TO CATEGORY TYPE
+
+df['film']=df['film'].astype("category")
+
+df['film'].cat.categories #See unique values
+
+===================================================================================================
+STICKY TKINTER 
+
+The sticky option tells tkinter what to do if there's more room for the widget than needed. 
+It tells tkinter which sides of the empty space the widget needs to "stick" to.
+==================================================================================================
+WHY SHOULD I DO df.copy() while copying a dataframe?
+
+In Pandas, indexing a DataFrame returns a reference to the initial DataFrame. 
+Thus, changing the subset will change the initial DataFrame. 
+Thus, you'd want to use the copy if you want to make sure the initial DataFrame shouldn't change. 
+
+Consider the following code:
+
+df = DataFrame({'x': [1,2]})
+df_sub = df[0:1]
+df_sub.x = -1
+print(df)
+You'll get:
+
+x
+0 -1
+1  2
+In contrast, the following leaves df unchanged:
+
+df_sub_copy = df[0:1].copy()
+df_sub_copy.x = -1
+
+====================================================================================================
+GET ONLY NUMERIC COLUMNS FROM A DF
+
+df.select_dtypes(include=np.number).columns.tolist()
+====================================================================================================
+
+CHECK IF DF IS EMPTY
+
+df.empty
+PROBLEM: If there are columns present and 0 rows, this still returns TRUE
+Solution :df.shape[0]==0 if you want to check if there are NO ROWS in the df
+
+pd.DataFrame().empty will give true
+but a df which has 0 rows but columns are there df.empty will give false
+
+===================================================================================================
+ENUMERATE
+
+Python's enumerate() lets you write Pythonic for loops when you need a count and the value from an iterable.
+It returns a tuple
+
+some_list=['a','b','c','d']
+
+for i in range(len(some_list)):
+	print(i,some_list[i])
+	
+output:
+0 a
+1 b
+2 c
+3 d
+
+for i, item in enumerate(some_list):
+	print(i,item)
+	
+Output:
+0 a
+1 b 
+2 c 
+3 d 
+
+Returs tuple
+
+for elem in some_list:
+	print(elem)
+	
+(0, 'a')
+(1, 'b')
+(2, 'c')
+(3, 'd')
+
+== SECOND ARGUMENT IN ENUMERATE
+
+enumerate(iterable, start=0)
+start (optional) - enumerate() starts counting from this number. If start is omitted, 0 is taken as start.
+
+start doesn't mean index of list will be taken from the number provided, it just provides a counter from that number
+
+example:
+
+some_list=['a','b','c','d']
+for i,item in enumerate(some_list,start=100):
+	print(index,val)
+
+Output:
+100 a
+101 b
+102 c
+103 d
+
+
+===================================================================================================
+ANY AND ALL
+
+list1:[2,4,6,8,9]
+
+=Check if all numbers are even in the list
+All([num%2==0 for num in list1]) -> FALSE
+
+=Check if any number is even in the list
+Any([num%2==0 for num in list1]) -> TRUE
+
+==================================================================================================
+IPYNB FILE NOT SHOWING IN JUPYTER
+
+Jupyter Notebook usually doesn't detect .ipynb files if the file path is too long. 
+It starts cribbing that "The file name or extension is too long"
+
+Possible solutions:
+
+Don't have many sub folders from the root folder where jupyter notebook opens from.
+
+
+===================================================================================================
+
+OOPS EXPLANATION
+
+For those of you interested in following the Python tutorials of this course, here is a short summary of 
+what you need to know in Object-oriented programming. In the Python tutorials, I will be talking about classes, 
+objects and methods. Please find below a clear explanation of what these concepts are:
+
+A class is the model of something we want to build. For example, if we make a house construction plan that 
+gathers the instructions on how to build a house, then this construction plan is the class.
+
+An object is an instance of the class. So if we take that same example of the house construction plan, then 
+an object is simply a house. A house (the object) that was built by following the instructions of the construction plan (the class).
+And therefore there can be many objects of the same class, because we can build many houses from the construction plan.
+
+A method is a tool we can use on the object to complete a specific action. So in this same example, a tool 
+can be to open the main door of the house if a guest is coming. A method can also be seen as a function that 
+is applied onto the object, takes some inputs (that were defined in the class) and returns some output.
+===================================================================================================
+HANDLE MISSING VALUES
+Link: youtube.com/watch?v=fCMrO_VzeL8
+
+==isnull & notnull
+our dataframe is ufo
+
+ufo.isnull() Puts True in all values in the dataframe if its NaN(Not a number) and False otherwise
+ufo.notnull() Opposite
+
+=Usecase 1: Check how many nulls are in each column in a df
+ufo.isnull().sum() #axis=0 (vertical) by default
+
+Example: pd.Series([True,False,True])).sum() gives 2
+
+=Usecase 2: Filter not null by column
+ufo[ufo.city.notnull()]
+
+
+==Drop missing values
+ufo.dropna(how='any') #Drop a row if any of its values are missing
+ufo.dropna(how='all') #Drop a row if all of its values are missing
+ufo.dropna(subset=['city','shape'],how='any') #Drop a row if either city or shape are missing
+ufo.dropna(subset=['city','shape'],how='all') #Drop a row if both city and shape are missing
+
+==FillNA
+
+ufo.shape.value_counts() #Will give non null value count of the categories
+ufo.shape.value_counts(dropna=False) #Will give non null + null value count of the categories
+
+ufo['Shape'].fillna(value='VARIOUS',inplace=True)
+
+
+
+
+
+===================================================================================================
+AND & DIFFERENCE (LOGICAL VS BITWISE)
+if operator_type=='include' || operator_type=='exclude': #This gave an error
+
+isin ~isin
+
+And:
+df[df['column1'>2 and df['column2'] < 100]] #Error
+Python is not a vectorized langauge, "and" is looking for a SINGLE TRUE/FALSE from both conditions
+#Error: The truth value of series is ambiguous
+
+Python Can't tell how to evaluate this (1. If one is true, take is as true (any) 2. If all are true then it's true (all) )
+
+
+zip workin with dict
+
+
+difference between raise("aslfafs")
+
+and catching the raise in except
+
+nan null blank diff
+
+====================================================================================================
+
+Modes of opening file in Python:
+
+https://www.youtube.com/watch?v=Q9K_wFj5DuQ
+
+	
+There are many modes of opening a file in Python, unlike other languages Python has provided its users a variety of options. We will discuss seven of them in this tutorial.
+
+r : r mode opens a file for read-only. We do not have permission to update or change any data in this mode.
+w : w mode does not concern itself with what is present in the file. It just opens a file for writing and if there is already some data present in the file, it overwrites it.
+x : x is used to create a new file. It does not work for an already existing file, as in such cases the operation fails.
+a : a stands for append, which means to add something to the end of the file. It does exactly the same. It just adds the data we like in write(w) mode but instead of overwriting it just adds it to the end of the file. It also does not have the permission of reading the file.
+t : t mode is used to open our file in text mode and only proper text files can be opened by it. It deals with the file data as a string.
+b : b stands for binary and this mode can only open the binary files, that are read in bytes. The binary files include images, documents, or all other files that require specific software to be read.
++ : In plus mode, we can read and write a file simultaneously. The mode is mostly used in cases where we want to update our file.

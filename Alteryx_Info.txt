@@ -1,0 +1,77 @@
+Alteryx Hacks
+
+
+========================================================================================================
+Read PDF/DOCX files
+Input it as CSV & Use "\0" as delimiter. Give it a high length & regex the required data.
+
+========================================================================================================
+
+
+========================================================================================================
+IBCCARE_ABCD_FFFFFF_Repair
+IBC_Repair
+ABC_GH_AA_Repair
+Operator
+
+Extract Repair from above & if not present extract current string
+
+right([Text],FindString(ReverseString([Text]),"_"))
+
+Reverse the string and find location of "_" & then go that any characters from right of actual string
+
+CATCH: -1 is returned when "_" is not found & right(text,-1) returns original string
+========================================================================================================
+
+
+========================================================================================================
+Swap date's month & days when date is future | REGEX SWAP GROUPS
+
+IF toNumber(Right(left([Date],5),2))>=11
+THEN
+REGEX_Replace(ToString([Date]), "(\d{2})-(\d{2})-(\d{4})", "$2-$1-$3")
+ELSE [Date]
+ENDIF
+========================================================================================================
+
+RETAIN FORMATTING
+
+In filepath: filename.xlsx|||'sheet$A1:Z1000'
+
+=======================================================================================================
+
+ADMIN VS NON ADMIN INSTALLATION 
+
+Short: Choose NON ADMIN
+
+https://community.alteryx.com/t5/Alteryx-Designer-Knowledge-Base/Installing-Admin-vs-Non-Admin/ta-p/32929
+
+=======================================================================================================
+
+LINKS for Advanced Exam
+
+1. Action types in action tool of interface.
+
+======================================================================================================
+
+Alteryx date format
+
+YYYY-mm-dd HH:MM:SS
+
+=======================================================================================================
+
+Open page
+
+HELP Page
+Specifiers
+
+Reporting + macro practice
+
+========================================================================================================
+
+When there is no column/data and you want to add blanks/0 for it:
+https://community.alteryx.com/t5/Alteryx-Designer-Discussions/Appending-an-empty-column-IF-said-column-does-not-exist/td-p/27778
+
+========================================================================================================
+BATCH MACRO ERROR: Output changed in between iterations:
+This usually happens due to different data type of columns(so you have force them in the select tool) & ordering of columns 

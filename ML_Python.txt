@@ -1,0 +1,207 @@
+=======================================================================================================
+OOPS EXPLANATION
+
+For those of you interested in following the Python tutorials of this course, here is a short summary of 
+what you need to know in Object-oriented programming. In the Python tutorials, I will be talking about classes, 
+objects and methods. Please find below a clear explanation of what these concepts are:
+
+A class is the model of something we want to build. For example, if we make a house construction plan that 
+gathers the instructions on how to build a house, then this construction plan is the class.
+
+An object is an instance of the class. So if we take that same example of the house construction plan, then 
+an object is simply a house. A house (the object) that was built by following the instructions of the construction plan (the class).
+And therefore there can be many objects of the same class, because we can build many houses from the construction plan.
+
+A method is a tool we can use on the object to complete a specific action. So in this same example, a tool 
+can be to open the main door of the house if a guest is coming. A method can also be seen as a function that 
+is applied onto the object, takes some inputs (that were defined in the class) and returns some output.
+
+========================================================================================================
+FIT & TRANSFORM
+
+fit: transformer learns something about the data
+transform: it uses what it learned to do the transformation
+
+Example: SimpleImputer
+A=np.array([1,2,3,np.NaN,4])
+B=np.array([1,2,np.nan,np.nan,np.nan])
+
+from sklearn.impute import SimpleImputer 
+imputer = SimpleImputer(missing_values=np.nan,strategy="mean")
+
+[ 1.,  2.,  3., nan,  4.] #A
+array([[ 1.],[ 2.],[ 3.],[nan],[ 4.]]) #A.reshape(-1,1)
+
+imputer.fit_transform(A.reshape(-1,1)) 
+Output #array([[1. ],
+       [2. ],
+       [3. ],
+       [2.5],
+       [4. ]])
+	   
+	   
+imputer.transform(B.reshape(-1,1)) #
+
+Output #array([[1. ],
+       [2. ],
+       [2.5],
+       [2.5],
+       [2.5]])
+
+
+fit_transform expects 2-D array so we have to do .reshape() to convert 1-D to 2-D
+
+fit calculates the operation to be applied, transform applies the operation
+when you did fit_transform on A, it calculated the mean for A
+since you used the same imputer, when you did imputer.transform(B)
+it used the mean value that it calculated for A and applied it on B
+
+
+=========================================================================================================
+REPLACING MISSING VALUES WITH SCIKIT LEARN
+
+1. #From Library "sklearn" import module "impute" Import class "SimpleImputer"
+from sklearn.impute import SimpleImputer 
+
+2. #Instance of class and parameter chosen as mean
+imputer = SimpleImputer(missing_values=np.nan,strategy="mean")
+
+3. #fit method of class will find out the average from matrix given to it(X). fit method expects columns with numerical values only
+imputer.fit(X[:,1:3]) 
+
+Example of fit
+imputer.fit([[1, 2, 3], [2, 3, 4]])
+imputer.statistics_
+
+array([1.5, 2.5, 3.5])
+
+4. #this method will do the replacement. By default it creates a new instance so we assign it back to X[:,1:3]
+X[:,1:3] = imputer.transform(X[:,1:3])
+
+
+==EXPLANATION 1:
+
+The Imputer fills missing values with some statistics (e.g. mean, median, ...) of the data. 
+To avoid data leakage during cross-validation, it computes the statistic on the train data during the fit, 
+stores it and uses it on the test data, during the transform.
+
+from sklearn.preprocessing import Imputer
+obj = Imputer(strategy='mean')
+
+obj.fit([[1, 2, 3], [2, 3, 4]])
+print(obj.statistics_)
+# array([ 1.5,  2.5,  3.5])
+
+X = obj.transform([[4, np.nan, 6], [5, 6, np.nan]])
+print(X)
+# array([[ 4. ,  2.5,  6. ],
+#        [ 5. ,  6. ,  3.5]])
+You can do both steps in one if your train and test data are identical, using fit_transform.
+
+X = obj.fit_transform([[1, 2, np.nan], [2, 3, 4]])
+print(X)
+# array([[ 1. ,  2. ,  4. ],
+#        [ 2. ,  3. ,  4. ]])
+This data leakage issue is important, since the data distribution may change from the training data to the testing data, and 
+you don't want the information of the testing data to be already present during the fit.
+
+
+==EXPLANATION 2:
+
+Here the fit method, when applied to the training dataset,learns the model parameters 
+(for example, mean and standard deviation). We then need to apply the transform method on the 
+training dataset to get the transformed (scaled) training dataset. We could also perform both 
+of this steps in one step by applying fit_transform on the training dataset.
+
+Then why do we need 2 separate methods - fit and transform ?
+
+In practice we need to have a separate training and testing dataset and that is where having a 
+separate fit and transform method helps. We apply fit on the training dataset and use the transform 
+method on both - the training dataset and the test dataset. Thus the training as well as the test 
+dataset are then transformed(scaled) using the model parameters that were learnt on applying the fit 
+method the training dataset.
+
+Example Code:
+
+scaler = preprocessing.StandardScaler().fit(X_train)
+scaler.transform(X_train) 
+scaler.transform(X_test) 
+
+==EXPLANATION 3
+
+https://towardsdatascience.com/what-and-why-behind-fit-transform-vs-transform-in-scikit-learn-78f915cf96fe
+
+Suppose you are training a K Nearest Neighbor model and you want to scale your features.
+
+fit_transform function will be used on training data so that you can scale the training data and also learn the scaling
+ parameters from the training data. Here, the model will learn the mean and variance of the features of the training set.
+ So actually what is happening here is that fit function is calculating the mean and variance and transform function is 
+ transforming the features using this mean and variance.
+
+Now, you want the same scale on your test data but you don't want to be biased with your model and that's why want to keep
+ the test data as a completely new and a surprise set for your model. The transform function helps us in this case. Using 
+ transform function you can use the same mean and variance as it is for your training data to transform your test data. 
+ Thus, the parameters learned by your model using the training data will help to transform your test data.
+
+Now why we actually did this?
+
+If you will also use the fit function on your test data you will compute a new mean and variance that is a new scale for 
+each feature and will let your model learn about your test data too. Thus what you want as a surprise is no longer unknown
+ to your model and you will not get a good estimate of how your model is performing on test data which is the ultimate goal
+ of building a model using a machine learning algorithm.
+
+========================================================================================================
+==Q DO YOU APPLY FEATURE SCALING BEFORE SPLITTING TO TRAIN/TEST OR AFTER IT?
+
+ANS: FEATURE SCALE AFTER TRAIN/TEST
+
+TRAIN: Train your model on existing observations
+TEST: Evaluate performance of our model on new observation(exactly like some future data that we'll get)
+
+WHY :TO AVOID DATA LEAKAGE(learning something new from testing data) ON THE TEST SET WHICH WE'RE NOT SUPPOSED TO HAVE UNTIL TRAINING IS DONE
+
+The test set is supposed to be a brand new set to evaluate our ML model. Test set is something 
+we're not supposed to work with for the training
+If we apply FS before the split, it will get the mean and std dev all values including the test set(it's supposed to be brand new)
+So this is called data leakage
+
+=========================================================================================================
+
+FEATURE SCALING
+
+=WHY? 
+Features(Independent variables) have different units and magnitudes so before we put them in models
+we need to bring them down to a same scaled
+
+=TYPE?
+1. Standardisation: Produces values between -3 and +3 : [x - mean(x)]/[S.D(x)]
+2. Normalisaion: Produces values between 0 and 1 : [x - min(x)]/[max(x) - min(x)]
+ 
+When to use what?
+1. Can always be used
+2. Can be used when data has normal distribution
+
+So it's safe to go with standardisation
+
+==Q Should we apply feature scaling to dummy variables?
+ANS : NO, won't be helpful. Goal of standardisation is to have values in same range. Dummy variables(for eg: value produced by one hot encoding:
+if we apply standardisation on it, it will lose its meaning producing nonsensical numerical values)
+
+==Q When it's not useful?
+AND: Decision Tree, Random Forest , XgBoost
+
+=HOW?
+Apply fit_transform to X_train #Here it will calculate the mean & S.D of the TRAIN data and apply tranform on it
+Apply only transform to X_test #Here it will use the mean and S.D of the TRAIN data calculated in previous step & apply that on TEST data
+
+Fit calculates the mean and S.D
+Transform applies the Standardisation formula using mean and S.D
+
+==========================================================================================================
+
+Dummy Variables in Multiple Linear Regression
+
+https://www.youtube.com/watch?v=fTfMdCQJz4s
+
+
+
