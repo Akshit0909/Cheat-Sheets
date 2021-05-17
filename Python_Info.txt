@@ -20,6 +20,30 @@ Y: ENTER CODE STATE
 Formatted line? <hr style="border:2px solid gray"> </hr>
 
 =============================================================================================================
+VS CODE
+
+Shift + Ctrl + P : New Jupyter Notebook
+Ctrl + Shift + P : command pallete
+Ctrl + ^ : open terminal
+Color theme : predawn theme kit
+File icon theme : ayu
+formatter : format document - use black (auto format code : SHIFT + ALT + F)
+default setting : default settings (JSON)
+linting: shows red line on errors(wrong syntax)
+
+using keyboard shortcut to run code: coderunner extension
+
+==TERMINAL COMMANDS
+cls : clear terminal
+python
+import sys
+sys.executable : full python path
+exit()
+
+How to run inputs? It was not possible in sublime..
+By doing "Run code in terminal"
+		
+=============================================================================================================
 PARSE EMAIL .MSG FILES
 
 import extract_msg
@@ -969,19 +993,45 @@ NOTE: If we have a situation where we have main.py and in folder STATE_FILES we 
 	  Pyinstaller automatically takes into consideration all the dependant files so we don't need to use "_MEIPASS"
 	  For the files that we want to keep dynamic Just locate the path in the code using the below logic:
 	  
+	  Let's say our application needs some files to work, in "one file" approach, we only have one exe file, so that's why we put the 
+	  required files in a temporary folder. So when exe starts it uncompresses the folder created in the temp memory.
 	  
+	  So now we have to find the location of that temporary folder and access the files from there.
 	  
+	  ==Getting full path current location of the exe file
 	  absolute_dir=os.path.abspath(path.dirname("__file__"))
-	  bundle_dir=getattr(sys,"MEIPASS",absolute_dir) //Use this statement if you want to locate the _MEIPASS(location to TEMP)
+	  
+	  // path.dirname("__file__"): gets the directory where .py file is
+	  // os.path.abspath : gets the full path of the directory
+	  
+	  ==Getting the location of temp folder. 
+	  We are adding the 3rd argument here which is the default value if _MEIPASS doesn't exist. So we're going to the pass the exe file path.
+	  1. Just in case system is not able to find the temporary folder. This is basically to prevent app crash in such a case.
+	  2. What if I want to run my app from IDE(on my local system before bundling the app), then I need the local directory path.
+	     I don't have the bundle_dir/MEIPASS present without bundling the app obviously
+		
+	  bundle_dir=getattr(sys,"_MEIPASS",absolute_dir) //Use this statement if you want to locate the _MEIPASS(location to TEMP)
+	  
 	  (pyinstaller unpacks your data into a temporary folder, and stores this directory path in the _MEIPASS environment variable.
+	  So basically _MEIPASS is an environment variable/attribute of sys that tells us where that temp folder is
 	   it is quite useful when you have some resource files (like .bmp .png) to load in your python one-file-bundled app.)
-	  input_path=path.join(absolute_dir,"Assets","STAT Automation Input.xlsx
+	   
+	  input_path=path.join(bundle_dir,"Assets","STAT Automation Input.xlsx")
+	  
 	  
 
 
 ICON ERROR: Convert .png to .ico using https://image.online-convert.com/convert-to-ico 
 	  
-	  
+PIP ERROR: PIP not recognized
+C:\Users\Akshit.Miglani\AppData\Local\Programs\Python\Python39\Scripts
+In this directory pip is not installed(it has been outdated)
+pip3 is there
+
+so try: pip3 install pyinstaller
+
+NOTE: pip3 and pyinstaller has been flagged by ey for python installer on ey system so pyinstaller command won't work
+Try it on conda environment and it will work
 =================================================================================================
 
 PYTHON INSTALl
@@ -1413,3 +1463,10 @@ a : a stands for append, which means to add something to the end of the file. It
 t : t mode is used to open our file in text mode and only proper text files can be opened by it. It deals with the file data as a string.
 b : b stands for binary and this mode can only open the binary files, that are read in bytes. The binary files include images, documents, or all other files that require specific software to be read.
 + : In plus mode, we can read and write a file simultaneously. The mode is mostly used in cases where we want to update our file.
+
+
+
+=========================================================================================================
+
+=========================================================================================================
+LOGS: OOPS

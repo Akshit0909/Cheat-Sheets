@@ -74,4 +74,20 @@ https://community.alteryx.com/t5/Alteryx-Designer-Discussions/Appending-an-empty
 
 ========================================================================================================
 BATCH MACRO ERROR: Output changed in between iterations:
+https://community.alteryx.com/t5/Alteryx-Designer-Knowledge-Base/CS-Macro-Dev-Reading-in-Multiple-Files-with-Different-Field/ta-p/13370
 This usually happens due to different data type of columns(so you have force them in the select tool) & ordering of columns 
+
+=========================================================================================================
+BATCH MACRO ERROR: Only first iteration read "1 iterations were run (ended by a downstream tool)" 
+Summary: Add browse tool after macro output
+https://community.alteryx.com/t5/Alteryx-Designer-Discussions/Batch-Macro-not-looping-after-running-the-workflow-as-an/td-p/84495
+
+=========================================================================================================
+
+REMOVE COLUMNS WITH ALL NULL VALUES
+https://community.alteryx.com/t5/Alteryx-Designer-Discussions/Automatically-Remove-all-null-Colums/td-p/48908
+
+========================================================================================================
+
+NAME RANGE PROBLEM
+When cellsa are merged in excel, it can convert string to numerics so string values in the column go null

@@ -60,3 +60,14 @@ git checkout -b newbranch
 #Meaning of git push -u origin master
 If we do "-u" then we don't have write the entire "git push origin master" again
 We can just do "git push" and it will take our remote repo(origin) and master(branch) from the last time we did -u
+
+
+================================================================
+WHAT IS HEAD?
+What does this mean, especially "HEAD" ?
+『 ʸᵃⁿⁿ🄾🅂 』™ — Today at 11:15 PM
+hmmmmmm it's where the pointer of your repo currently is
+when you do a commit, you move the HEAD to that new commit
+when you do git checkout  <commit-id> you move the HEAD to that commit
+it's like.... your cursor when you're writing a some text (:
+it's "where you are"
