@@ -1,0 +1,20 @@
+DS Job
+
+============================================================================================================
+Chandrachur Mukherjee
+
+Analytics Leader at Fractal | Helping Fortune 500 companies develop a competitive datadvantage
+5h • 5 hours ago
+
+Immediate requirement for a Data Scientist to join one of our clients in the domain of Financial Services.
+Location: US (Remote as of now)
+Requirement:
+- 5+ years of experience in data science across a broad range of data technologies: collection, storage, extraction, 
+transformation, analysis, visualization
+- Advanced knowledge of SQL is required & skilled in R, Python, SAS or similar statistical software
+- Excellent communication and presentation skills are must
+- Hands-on experience in one, or more of the following is strongly preferred: predictive modeling, churn analysis, 
+time series forecasting, recommender systems, market basket analysis, segmentation
+
+
+==============================================================================================================

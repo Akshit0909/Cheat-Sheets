@@ -1,0 +1,661 @@
+ANGLO AMERICAN SOD
+
+TECHNICAL
+
+1. Format of COPPER was different from other, EXTRA FIRST ROW FOUND
+2. Roles names should be same across SOD matrix worksheets
+3. Python column blank NON NULL Logic
+
+8th December:
+1. python HR
+2. Alteryx Reporting
+3. App testing & improvement
+4. python tkinter course
+
+
+01 FEB:
+D1. 10 W
+ 2. NY Art
+D3. Alteryx Recap
+ 4. Tableau Course
+D5. STAT INV LIMIT
+D6. Python HR
+D7. Ad Hoc Work
+
+02 FEB:
+1. Python Prepin Data
+D2. Alteryx Recap(Practical)
+D3. Ad Hoc Work
+D4. Alteryx Interactive
+D5. STAT INV LIMIT
+D6. 10W
+7. NY Art
+
+03 FEB:
+1. Tableau Server
+2. Tableau Course
+3. STAT INV LIMIT
+4. Ad Hoc Work
+5. Excel Course
+6. Python Exercise
+7. 10 Words
+8. NY Art
+
+08 FEB:
+D1. STAT INV LIMIT
+D2. 10 Words
+3. Aldaily
+D4. Ad Hoc Work
+D5. Excel Course
+6. Python Exercise
+7. PDX Fridge
+8. Alteryx Problem
+
+09 FEB:
+D1. STAT INV LIMIT
+D2. Alteryx Advanced Q
+D3. 10 Words
+D4. Aldaily
+D5. Python Exercise
+D6. Ad Hoc: PPT
+
+10 FEB:
+D1. Excel Course ARRAYS 
+D2. 10 Words
+D3. Aldaily
+D4. STAT INV LIMIT: INTEGRATION
+5. Python Excercise
+D6. Alteryx Trainings
+
+11 FEB:
+D1. Tableau: Thursday Training & Adam's Training
+D2. STAT INV LIMIT: TESTING, ERROS
+D3. 10 Words
+4. Aldaily
+5. Python Exercise
+
+12 FEB:
+D1. 10 Words
+2. Aldaily
+3. Excel Mgmt Consulting
+4. STAT INV LIMIT
+
+WEEKLY GOALS:
+Data Science Badge Start, Data Integration Badge Submit, 50 words, Python Exercise, PDX Data
+
+18 FEB:
+1. STAT INV LIMITATION: UI + EXE + CODE FIX
+2. Jin Alteryx Ad Hoc
+3. Data Integration Course Complete
+
+
+Week Target: Alteryx Advanced, DS Badge, Tableau Dash, 50W + 5 ART, Project Architecture,Python IDE
+22 FEB:
+D1. 10 Words
+D2. Article
+D3. Tableau Dashboard
+D4. STAT INV LIMIT 
+5. Data Science Badge
+D7. Project Architecture
+
+23 FEB:
+D1. 10 Words
+2. Article
+3. Tableau Dashboard
+
+
+REMINDER: Fast zone, it has been long
+01 MAR:
+D1. Data Integration Query
+2. Data Science Bronze Start
+3. 10 Words
+4. Alteryx Post On Linkedin	
+D5. IA Project
+6. Article
+D7. STATS
+
+02 MAR:
+1. Data Science Bronze
+D2. IA Project Python
+D3. STATS
+D4. Article
+D5. 10 words
+D6. Badge mail send
+
+03 MAR:
+D1. 10 Words
+D2. IA Project Python
+D3. Article
+D4. Data Science Bronze
+5. STATS - Tut Complete
+
+04 MAR:
+D1. 10 Words
+D2. IA Project Python
+3. Article
+4. Data Science Bronze
+5. STATS - Manhattan
+D6. DI Badge Submit
+7. Word Exercise
+D8. Documentation Instinet
+D9. Alteryx Twitter
+
+Week 08-13 MAR
+
+08 MAR:
+D1. 10 Words
+D2. Article
+3. IA Project Python
+D4. Data Science Bronze
+D5. Quants:
+
+09 MAR:
+D1. 10 Words
+D2. IA Project Python ~Overload
+3. Quants 10 Questions
+4. Data Science Bronze
+5. Article
+6. AND OR Doc
+
+10 MAR:
+1. 10 Words
+2. IA Project Python
+3. Quants 10 Questions
+4. Data Science Bronze
+5. Article
+6. AND OR Doc
+
+SEABORN GALLERY VIZ
+
+22 MAR:
+D1. 10 Words
+D2. Project Video
+D3. Quants 10 Q
+D4. Project Architecture
+D5. Article
+D6. HR Python
+
+23 MAR:
+D1. 10 Words
+D2. DS documentation start
+D3. Quants 10 Q
+D4. Project Architecture Complete
+D5. Article
+6. HR Python
+
+24 MAR:
+D1. 10 Words
+2. DS documentation complete
+D3. Quants 20 Q
+D4. ML Start
+D5. Article
+
+
+25 MAR:
+D1. 10 Words
+D2. DS documentation complete
+D3. Quants 10 Q 774
+4. Article
+D5. ML Cont
+
+26 MAR:
+D1. 10 Words
+2. Tableau AAPI
+3. Quants 10 Q 774
+4. Article
+D5. ML Cont
+D6. Prepin Data
+
+30 MAR:
+D1. 10 Words
+D2. IBM Watson Python
+D3. Quants 10 Q 774
+4. Article 139
+D5. ML Cont
+6. Prepin Data
+
+31 MAR:
+D1. 10 Words
+D2. Prepin Data
+3. Quants ST
+D4. Article 139
+5. ML Cont- Post code to Github
+
+01 APR:
+D1. 10 Words
+D2. ML Cont
+D3. Article with Sru
+D4. Prepin Data
+D5. Learn Github
+
+05 APR:
+D1. 10 Words
+2. RC
+D3. Prepin Data
+D4. Github Vid
+D5. ML Cont
+
+06 APR:
+D1. 10 Words
+D2. RC
+D3. Prepin Data Post
+D4. ML Cont
+D5. IBM Watson RSRCH
+
+07 APR:
+D1. 10 Words
+D2. IBM Code Study
+3. ML Cont
+D4. RC
+5. Exercise 10 W
+
+
+08 APR:
+D1. IBM Code
+D2. ML Cont
+D3. 9:30 - 10:30 PM: NLP
+4. RC
+5. Post Code to GH
+
+09 APR:
+D1. 10 words
+2. ML Cont: MLR Complete
+3. Post code to GH
+4. Quant
+
+12 APR:
+D1. 10 Words
+D2. Mock
+
+13 APR:
+D1. 10 Words
+D2. ML Cont
+D3. Quant
+
+14 APR:
+D1. 10 Words
+D2. Quant DI
+D3. ML Cont
+4. VR Review
+
+15 APR:
+D1. 10 Words
+2. Quant DI
+D3. ML Cont
+4. VR Review
+
+16 APR:
+D1. 10 Words
+2. Quant DI
+3. ML Cont
+4. VR Review
+
+19 APR:
+D1. 10 Words - 1 hour
+D2. Geom - 1 hour Theory + 1 hour Q
+3. ML - 2 hours
+D4. SQL Query
+
+20 APR:
+D1. 10 Words - 1 hour
+D2. Geom - Theory
+D3. ML - 2 hours
+-4. Study Session Hi
+5. NPS and tax declaration
+
+21 APR: What is overfitting?
+D1. 10 Words - 1 hour
+D2. Geom - Qs - 7:30 - 9
+D3. ML - 2 hours NLP - 11:00 + & 2:30 - 3:30 
+D4. NPS and tax declaration - 11:00
+D5. Stelco - 2 hrs - 4:30 - 7:00
+
+22 APR:
+D1. 10 Words - 1 hour - up to 2:30
+2. Verbal RC Med - 2 hours 8:00 - 9:00
+D3. ML - 2 hours NLP - 2:30 to 3:30 + Post Dinner
+D4. Stelco - 4 hrs - 7:30 - 8:30 + 5:00 - 7:00
+6. Global badge comp - Post Dinner
+O7. Tableau/Alteryx TTT
+
+23 APR:
+D1. Stelco - 4 hrs
+2. Verbal RC Med - 2 hours
+3. ML - 2 hours NLP + commit previous code
+4. 10 Words - 1 hour
+5. Global badge comp - Post Dinner
+
+Week 26 APR - 02 MAY: Global Badge, Prepin Data, ML
+26 APR:
+D1. Stelco - 2 hrs - Kenyon
+D2. Verbal - 1 hour
+D3. ML - 2 hours NLP
+D4. 10 Words - 1 hour
+D5. Global badge comp - Post Dinner
+D6. Misc - 1 hour
+
+27 APR: https://medium.com/@rahul77349/feature-scaling-why-it-is-required-8a93df1af310
+1. Stelco - 2 hrs - Kenyon
+2. Verbal - 1 hour
+D3. ML - 2 hours : Random Forest Josh + ML Udemy
+D4. 10 Words - 1 hour
+5. Misc - 1 hour
+
+28 APR: 
+D1. Stelco - 2 hrs - Kenyon
+2. Verbal - 1 hour
+D3. ML - 2 hours
+D4. 10 Words - 1 hour
+D5. Misc - 1 hour NHSA
+
+29 APR:
+D1. Stelco - 2 hrs - Kenyon + Run Others
+D2. Verbal - 1 hour
+D3. ML - 2 hours
+D4. 10 Words - 1 hour
+D5. Misc - 1 hour - Iliza
+
+30 APR: Python Key Word Algo Day/Night
+1. Stelco - 2 hrs - Run Others + Python
+D2. Verbal - 1 hour
+D3. ML - 2 hours
+D4. 10 Words - 1 hour
+5. Misc - 1 hour - Sample Acc Tool 
+
+WEEK 03 MAY
+Mon - 7hrs NHSA
+Tue - 9hrs SQL 6 hours NHSA
+Wed - 7 hrs NHSA
+Thu - 5 hrs
+Friday - 5 hrs
+
+03 MAY:
+D1. 10 Words - 1 hour
+D2. 2 RC - 1 hour 149
+3. Stelco - 3 hours. Python Model + Re Reruns
+4. SQL Work
+5. TSF
+D6. ML
+D7. NHSA: took a lot of time
+
+04 MAY:
+D1. 10 Words - 1 hour
+D2. 2 RC - 1 hour 149
+3. Stelco - 2 hours. Python Model + Re Reruns
+D4. SQL Work
+D5. TSF
+D6. ML
+7. NHSA: Check diff between outputs + watch on-demand video
+
+05 MAY:
+D1. Words Qs : 4 set
+D2. 2RC 153-208
+D3. NHSA Video + Process : 3-4 hours
+D4. ML
+5. TSF
+P6. Stelco Python
+
+06 MAY:
+D1. Words R
+D2. 2RC
+D3. Stelco Python Model
+D4. ML : LR youtube + plot understanding
+5. TSF
+6. Yann Code
+7. Package SAT
+
+07 MAY:
+1. Words R
+D2. 2RC
+D3. Stelco Python Complete
+D4. ML Cont
+5. TSF
+6. Stelco Workflow Complete
+
+
+
+
+10 MAY:
+D1. 2RC
+2. WR
+D3. NHSA
+D4. ML
+
+11 MAY:
+D1. 2RC
+2. WR
+D3. NHSA
+D4. ML
+
+17 MAY:
+D1. Words
+D2. 2 RC
+D3. ML
+4. TSF
+
+18 MAY:
+1. Words Revise
+D2. RC
+D3. ML
+4. TSF
+5. Tableau Revise
+6. Quant Session
+D7. NSHA
+
+19 MAY:
+D1. RC
+2. Words Revise
+D3. ML RF + DT UseCase
+D4. IBM Code
+
+20 MAY:
+D1. RC
+2. Word Revise Greg/Excel
+3. ML Udemy
+4. Spacy Code
+5. Adhoc/TSF
+6. Code understand NLP
+D7. SC 10 Q -48 79
+
+21 MAY:
+D1. RC
+D2. Word Revise
+3. ML Udemy
+D4. SC 10
+5. Code Understand NLP
+6. Spacy
+
+03 JUN:
+D1. Apriori
+2. Decorators
+D3. ML Hierachy clustering
+D4. FTI
+D5. RC X 2
+D6. TC X 20
+D7. Words
+D8. Quants
+9. Work
+
+04 JUN:
+D1. Apriori Github
+D2. Bitwise Logical
+3. Named Entity Spacy
+4. Words
+D5. RC X 2
+D6. TC X 20
+7. Quants Geom
+8. Work
+9. Mck
+
+07 JUN:
+D1. Prep - 2 hrs
+D2. ML - 2 hrs
+D3. Work - 2 hrs
+4. Mock Analysis - 2 hrs
+5. Words
+
+08 JUN:
+D1. Mock Analysis - 2hrs
+D2. ML - 2 hrs
+3. Work - 2 hrs
+4. Words
+
+09 JUN:
+1. Mock Analysis - 2hrs
+2. ML - 2hrs
+D3. Work - 2hrs
+D4. Words
+
+10 JUN:
+D1. Mock Analysis - 2hrs
+2. ML - 2hrs
+3. Work - 2hrs
+4. Words
+
+14 JUN:
+D1. Greg Words
+D2. ML
+3. Work
+D4. Qs RC
+5. Words Review
+6. PDF
+
+16 JUN:
+1. Guru Work
+D2. PDF Work
+D3. Words
+D4. Princeton
+5. ML
+D6. Qs RC
+
+17 JUN:
+1. Sox Sample Work
+D2. Q RC
+3. Words
+D4. ML
+D5. Guru Work + email
+D6. Analyze Mock 610
+D7. Send PowerBI Noah
+D8. Updated Github
+
+18 JUN:
+D1. Sox Sample Work 
+D2. RC Last
+D3. Guru Work
+4. ML Xg Boost in depth
+5. ML Github transfer
+6. Words : Red words X 2
+
+21 JUN:
+1. Sox Sample exe
+
+
+
+WEEKLY TARGET
+-Document project learnings
+-Medium ML Project
+
+
+
+28 JUN
+D1. Manh Algeb 
+D2. 2 RC - 87 122
+D3. 20 Q TE + SE - did 4 hard ETS
+D4. Words Rev
+
+29 JUN
+1. Manh Algeb Ineq - 347 356 2 - 4
+2. 2 RC - 87 122 5-6
+D3. ETS Hard SE/TC 11-12
+D4. TMT 2 hrs : 1-2, 7:30 - 9
+5. Words Greg YT: 12 - 1 am
+
+30 JUN:
+D1. Manh Algeb Ineq - 347 356 2 - 4
+D2. 2 RC - 87 122 5-6
+3. SE/TC
+4. PowerBI 2 hrs
+D5. Words Greg YT: 1-2
+
+31 JUN:
+D1. Rates and work
+2. SE/TC
+D3. PowerBI 2 hours
+4. Voc.com + Words
+
+02 JUL:
+1. Avg WE
+2. SE/TC
+3. PowerBI 2 hours
+D4. Words Greg YT
+5. Mck Py
+
+- Call with MHLK
+05 JUL:
+1. TMT PowerBI - 3 hrs
+2. Mck Stats - 3 hrs
+3. Greg YT + Words - 2 hours
+
+12 JUL:
+1. ADS Test Research + Study
+2. Words
+3. Mck ML
+4. Work
+
+IBM Process Flow:
+https://github.com/IBM/watson-discovery-news
+
+apply fxn github
+advanced quant 5lb
+next week: think project nlp?
+git udemy
+fractal ;  Deep learning ,Python, Tensorflow, keras, PySpark, spark ml and able to Develop and Deploy Deep learning model & code in Production environment.
+
+
+
+
+https://gmatclub.com/forum/the-only-contents-of-a-container-are-10-disks-that-are-each-numbered-296134.html
+
+bias variance
+precision recall
+generatos
+237 266
+
+
+I'm not being productive
+
+LOG:
+https://medium.com/@rahul77349/feature-scaling-why-it-is-required-8a93df1af310
+https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
+yann code
+LR project
+tkinter architecture grid
+--run jypter on vs
+improve alteryx model for brackets removal
+ML pipeline
+feature selection
+pylance
+OOPS
+https://towardsdatascience.com/how-to-distinguish-yourself-from-hundreds-of-data-science-candidates-62457dd8f385
+
+
+https://towardsdatascience.com/extracting-text-from-scanned-pdf-using-pytesseract-open-cv-cd670ee38052
+
+Canada : E-65751879
+
+Stelco : 35 hrs last to last to last, 10 hrs last to last week
+
+
+
+
+
+
+
+
+
+
+R coding.
+Python coding. This section includes NumPy and scikit questions.
+Statistics. This section includes T-tests, Anova regression distributions, and chi-square.
+
+

@@ -88,6 +88,12 @@ REMOVE COLUMNS WITH ALL NULL VALUES
 https://community.alteryx.com/t5/Alteryx-Designer-Discussions/Automatically-Remove-all-null-Colums/td-p/48908
 
 ========================================================================================================
+What if cross tab doesn't have columns in automations next iteration and those are used on formulas?
+
+https://community.alteryx.com/t5/Alteryx-Designer-Discussions/Check-if-column-exists-and-if-not-create-it-with-a-formula/td-p/430555
+
+
+=======================================================================================================
 
 NAME RANGE PROBLEM
 When cellsa are merged in excel, it can convert string to numerics so string values in the column go null

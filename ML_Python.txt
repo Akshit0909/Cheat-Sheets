@@ -1,3 +1,50 @@
+BIBLE:
+
+https://towardsdatascience.com/how-to-distinguish-yourself-from-hundreds-of-data-science-candidates-62457dd8f385
+
+End to end deployment:
+
+https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b
+
+=======================================================================================================
+==DATA SCIENCE GENERAL
+
+
+==Q
+The other day, I had a discussion with one of my buddy Data Scientist enthusiast who is also a student of you and Kirill.  
+we thought of asking you the below questions.
+
+1)How would we determine what all the significant independent variables(let’s say the data set has 200 independent variables) 
+that are directly correlated to the dependent variable.
+2)How would we choose what kind of ML model fits for my business problem.
+3) Do we need to perform multiple models for one business problem and then suggest the best one to business?
+4)How would we determine / come to a conclusion that my model’s predictions are correct / accurate?
+Do you have any certain documentation for these kind of questions or Is there any standard approach / process so that we 
+(Data Scientist enthusiast’s) can follow in any Data Science project.
+
+I request you to provide as much as information so that it will be grateful to us.
+
+Last question: Do you guys have any Books(Written by you or Kirill) on Data Science/Machine Learning/Deep Learning/AI so 
+that we would like to buy them. Kindly advise.
+
+==A
+
+Here is a classical paper about Feature Selection:
+
+http://www.jmlr.org/papers/volume3/guyon03a/guyon03a.pdf
+And there is another approach:
+http://www.datasciencecentral.com/profiles/blogs/feature-selection-based-on-predictive-power
+We cover Dimensionality Reduction in Part 9. Nowadays a tSNE is very popular as well:
+https://distill.pub/2016/misread-tsne/
+
+Yes, we need to try different models and check their performance on different subsets to understand what is better.
+
+"All models are wrong, but some are more useful" George E. P. Box.
+
+The process of checking model performance could be partially automated, see Part 10 of the course. 
+
+
+
 =======================================================================================================
 OOPS EXPLANATION
 
@@ -203,5 +250,50 @@ Dummy Variables in Multiple Linear Regression
 
 https://www.youtube.com/watch?v=fTfMdCQJz4s
 
+==========================================================================================================
+
+TSF
+
+Predicting new values based on historical data
+
+ACF : Auto Correlation : 
+
+========================================================================================================
+
+Unsupervised vs supervised learning
+
+Supervised: We know what to predict
+
+Unsupervised: We don't know what to predict; have to fin patterns in the data to find out what to predict
+
+=========================================================================================================
+
+UCB 
+
+Hope we understand the problem:
+
+Problem statement: Discovering which slot machine (option) provides the best expected return/ payout, in an optimum (minimum) no. of trials.
+
+Solution strategy:
+
+1) A/B Testing - You actually carry out sufficiently large on of trials on each slot machine independent of the results (return/ yield ) of 
+other machines. Given, large number of trials, this would provide the answer to our problem.
+
+Problem with A/B Testing: In real life situation, we have limited resources (time and money) and cannot afford to carry out random trials 
+(A/B Testing approach) to ascertain the winner. Moreover, this approach is quite dumb, as the algorithm does not learn from previous trials
+ carried out on competing machines (options)
+
+2)  Upper Confidence Bound algorithm.- It starts out like A/B testing in as much as it randomly chooses a machine for trial, but incorporates
+ the feedback from the result of trial,  to adjust the expected return from that machine. Also, this is the step, that the algorithm become 
+ smart (learns). This step differentiates the particular slot machine from others, in terms of expected return (the trial stops being dumb). 
+ Moreover, the result of one trial on machine also communicates something for the number of subsequent trials to be carried out on other machines
+ , to arrive at the winner.
+
+This process happens as we iteratively carry trials on other slot machines and adjust their expected return. Every successive trial differentiates
+ the slot machines in  terms of expected payout. Also, every successive trial narrows down the confidence interval (in which the actual expected 
+ return is expected to lie), thus optimizing the procedure.
 
 
+
+Thus, UCB would arrive at the optimal strategy in very few trials (less resources), because of its ability to learn (extract  extra information 
+at every trial) more as compared to the dumb A/B Testing approach.

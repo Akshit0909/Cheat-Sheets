@@ -1,0 +1,11 @@
+PYTHON ERROR:
+
+Appending DataFrames
+
+ValueError: Plan shapes are not aligned
+Reason: When two columns have same names, Pandas get confused which one to join to which one
+Solution:
+this was caused when I tried to concat dataframe df1 with columns ['A', 'B', 'B', 'C'] 
+(see the duplicate column headings?) with dataframe df2 with columns ['A', 'B']. 
+Understandably the duplication caused pandas to throw a wobbly. 
+Change df1 to ['A', 'B', 'C'] (i.e. drop one of the duplicate columns) and everything works fine.

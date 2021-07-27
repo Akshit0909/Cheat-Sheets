@@ -1,0 +1,92 @@
+INT INFO
+
+===========================================================================================================================
+Mck Quanthub
+==============================
+Python : 
+1. Data reshaping (value_counts and something)
+
+Jack Ray Mason
+a     a    b
+a     m    b
+b     c    b
+b     m	   m
+c     k    a
+
+TO
+      a   b  c  m  k
+Jack  2
+Ray   1
+Mason 1
+
+2. Unsampling Binary Classification. How to deal with imbalance classes with unsampling in Python
+Data was a dataframe like feature_0 feature_1 .... target
+target had value 0,1
+
+3. Downsampling Binary Classification
+4. Calculate f1_score. I was given actual and predicted list which both had values in shape like [0,1,0..]
+5. Convert numpy array date to datetimestamp. Output was like [timestamp(1990-08-93 12:12:12),...]
+6. Strip punctuation from string. String module was imported
+7. Delete rows where a column is more than a threshold value
+8. What is the output
+9. Calculate minimum value in a numpy matrix
+
+
+def foo(*args):
+    print('foo(',*args,')')
+    
+    def inside_foo(x):
+        print('inside_foo')
+        
+        def inside_inside_foo(*args):
+            print('inside_inside_foo(',*args,')')
+            return x(*args)
+        
+        return inside_inside_foo
+    return inside_foo
+
+
+@foo(1,2,3)
+def bar(*args):
+    return sum(args)
+
+
+print('outside')
+print(bar(4,5,6))
+
+==============================
+STATS
+
+1. We have to see how 2 variables vary according to a category with more than 10 entities. Use ANOVA/MANOVA etc
+2. Stratified/Clustered/Bootstrap sampling
+3. Which sampling to use in '=
+4. How does r squared and correlation related in univariate and multivariate?
+Does r square means squared of correlation in only univariate or in both?
+5. Sampling method for blood pressure hypertension
+6. Sampling method for : First take 5% sample in each category then take random sample : cluster/multistage/stratified/simple random?
+7. if probability of one event is 1.001 time probability of another and there is 0.25% probability that it happened by chance
+then what is it is the association important/unimportant and statisctically significant/ not ss
+8. if 95% confidence interval in t test includes 0 is it statisctically significan or what
+9. Calculate variance. 5 sample size. 20 population mean. sum of squared = 2100
+
+========================================================================================================
+
+Mck Round 1
+
+D1. Assumptions of Linear Regression
+D2. If there are 15 features, how many rows would you use
+D3. Can Logistic Regression be used for multi classification?
+D4. Evaluation metrics for Regression
+5. How would you reduce the features from 60 to 15.
+6. TF IDF How is it calculated
+7. If R2 and p values is same in 2 models, which is the better one?
+D8. How to prevent overfiting?
+9. Difference between Bagging and Boosting. Do we also take the mean in Boosting?
+10. Process of NLP
+D11. Multi Collinearity : If 2 variables are dependant on each other. Which one do you remove?
+12. Semantic Analysis Cosine Similarity in NLP
+D13. Ridge Lasso Regression
+D14. What is Regularisation?
+D15. Bias Variance Trade Off
+16. Missing Data Filling in ways
+17. How is logistic regression different from linear regression?

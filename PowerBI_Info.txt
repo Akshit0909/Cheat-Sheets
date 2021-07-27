@@ -1,0 +1,77 @@
+General Info
+
+https://powerbi.microsoft.com/en-us/blog/
+
+===================================================================================================================
+==REGIONAL SETTINGS
+
+Several of the csv files used in this section contain date fields, which follow US-specific formatting (MM/DD/YYYY).
+If you are located outside of the United States your system may not recognize these fields as dates, and they may be 
+loaded as text fields instead (which yields errors and prevents you from using the Date & Time tools in the Query Editor).
+
+Note that regional settings may impact other fields as well, including currency, since some regions use a comma as a 
+decimal separator ($2,75) instead of a period ($2.75). Furthermore, some regional settings require a semicolon (;) to 
+separate lists or formula arguments, rather than a comma (,) as shown in the course.
+
+If you are using non-US regional settings, please follow the steps below:
+
+Option 1) Update Power BI Desktop Regional Settings
+1. Open Power BI Desktop and click the File menu
+2. Navigate down the menu options and select Options and Settings, then, select Options from the sub menu
+3. From the Options window, click on Regional Settings located under the Current File options
+4. Update the Locale for Import to English (United States)
+5. Click OK, save the workbook, and close and reopen to confirm that the settings have been applied
+
+Note: This process updates the regional settings for the current Power BI workbook only. 
+If you open a new Power BI workbook and need to update the regional settings, you'll need to repeat this same process.
+
+
+
+Option 2) Update Windows Regional Settings
+Microsoft Windows regional settings will influence how your date/time, numeric, and currency data types appear when 
+you apply formatting options. The following procedure shows you how to change the Windows regional settings for your computer:
+
+Windows 10
+
+1. Click the Start button, and then click Control Panel
+2. Click Change date, time, or number formats
+The Region dialog box appears
+3. On the Formats tab, select the format you want to change from the drop-down list. Now click the Additional Settings button
+The Customize Format dialog box appears
+4. Click the tab that contains the settings that you want to modify and make your changes. For example, to change part or all of a number format, click the Numbers tab and change the setting that you want
+
+=====================================================================================================================
+
+==ROLLING CALENDER : From a date to current date (dynamic)
+
+= List.Dates(Source, Number.From(DateTime.LocalNow()) - Number.From(Source), #duration(1,0,0,0))
+
+Source is manually entered date : =#(2018,1,1)
+What we're doing: 
+-Calculate the current date and compare that to the source date (this subtraction will result in a number)
+-Based on a difference between those 2 dates, list down all of individual values where duration is one day
+
+Give me a list at daily granularity between the source date and current date
+
+======================================================================================================================
+== TRANSPOSE VS PIVOT
+
+Pivot : Vertical to Horizantal : In case of duplicate values it will consider them as one and sum them up
+Transpose : If we have duplicate values, it will consider them as different
+
+======================================================================================================================
+==REFRESH SETTINGS
+
+When we click on refresh, it will refresh all the files. What if I don't want to refresh certain files(as it takes time and those
+are lookup files that don't really change much)
+
+Go to transform data(query editor) -> Right click data on left pane -> Uncheck "Include in refresh"	
+
+======================================================================================================================
+Statistics tools are only available to use from the Transform tab in the Query Editor
+Latest returns a single value (like Statistical functions), and can only be accessed from the "Transform" tab
+Unpivoting transforms a table from a horizontal orientation to a vertical orientation by turning distinct column values into rows
+
+
+
+

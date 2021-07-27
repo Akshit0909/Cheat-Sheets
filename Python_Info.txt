@@ -44,6 +44,39 @@ How to run inputs? It was not possible in sublime..
 By doing "Run code in terminal"
 		
 =============================================================================================================
+
+CREATE VIRTUAL ENVIRONMENTS | CHANGE ENVIRONMENT TO CONDA IN VS CODE
+
+Step 1 : Create virtual environment
+python -m venv myvenv
+
+Step 2 : Change Interprator
+Bottom left or ctrl + shift + p -> python: select interprator
+Choose Python venv (vs code will automatically pick it up)
+
+
+Change environment to CONDA/Virtual Environment
+vs code should automatically detect where it is in list (ctrl shift P -> python: select interprator)
+
+But if you have it installed somewhere else on your machine
+Then we need to post its directory in settings.json file
+
+Hard code the path there like : "python.pythonPath": "venv\\Scripts\\python.exe"	
+
+check anaconda path in anaconda terminal : where anaconda | where python
+check all info: conda info
+
+
+Summary: Nothing really worked (to integrate conda with vs code) error: conda not recognized
+Explanation: They have made some changes recently. the PATH environment variable is no longer changed by default, 
+as this can cause trouble with other software. The recommended approach is to instead use Anaconda Navigator or the 
+Anaconda Command Prompt (located in the Start Menu under “Anaconda”) when you wish to use Anaconda software.
+https://stackoverflow.com/questions/44515769/conda-is-not-recognized-as-internal-or-external-command
+
+Just launch vs code from anaconda navigator
+
+
+=============================================================================================================
 PARSE EMAIL .MSG FILES
 
 import extract_msg
@@ -968,9 +1001,9 @@ Difference between access files in temp and in local:
 Hide Chrome Console
 
 Step 0: Go to the folder where py file is located
-Step 1: pyinstaller STAT_Investement_vF01.py --onefile --add-data "State_Files;State_Files" --windowed --icon=eylogo.png
+Step 1: pyinstaller STAT_Investement_vF01.py --onefile --add-data "State_Files;State_Files" --windowed --icon=eylogo.ico
 		
-		--add-date "folder that exists on your local system;folder name that you want to create in the temp folder"
+		--add-data "folder that exists on your local system;folder name that you want to create in the temp folder"
 		
 		NOTE: --windowed is to hide the console window that pops up and shows the outputs/logs
 		Doing windowed=True or console=False will do the same thing
@@ -1467,6 +1500,37 @@ b : b stands for binary and this mode can only open the binary files, that are r
 
 
 =========================================================================================================
+==glob.glob //used for file searching by expression
+
+PROBLEM: Returning empty list
+Debug: glob.glob('*') //It will tell you where it's searching
+
+
+=========================================================================================================
+
+Save file in new sub folder (Create sub directory and save file there)
+
+absolute_dir=os.path.abspath(path.dirname("__file__"))
+dir_path = os.path.join(absolute_dir,'screenshot')
+if not os.path.isdir(dir_path):
+	os.mkdir(dir_path)
+pyautogui.screenshot(os.path.join(dir_path,'screenshot.png'))
+
+========================================================================================================
+==GENERATE ROW NUMBER IN A DATAFRAME
+https://www.datasciencemadesimple.com/generate-row-number-in-pandas-python-2/
+
+=========================================================================================================
+== String to Float Value ERROR
+
+https://stackoverflow.com/questions/54065751/valueerror-could-not-convert-string-to-float-when-converting-input
+
+Basically
+a = ''
+float(a) //This gives value error
+
+a = '15.01   `
+float(a) //This does not
 
 =========================================================================================================
 LOGS: OOPS
