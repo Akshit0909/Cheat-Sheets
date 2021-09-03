@@ -297,3 +297,47 @@ This process happens as we iteratively carry trials on other slot machines and a
 
 Thus, UCB would arrive at the optimal strategy in very few trials (less resources), because of its ability to learn (extract  extra information 
 at every trial) more as compared to the dumb A/B Testing approach.
+
+===================================================================================
+
+Categorical Variable Treatment
+
+We have two types: Ordinal (Male/Female) and Nominal(Order matters: M->T->W->Th->Fr)
+
+Label Encoding (Map them to 0->n-1) : Works for DT, RF, GBM, Light GBM, XgBoost
+Binarization(Convert to binary number form from 0->n-1 numbers): Logistic Regression, Lin Reg, SVM
+One hot encoding(0/1 sparse data : for each category): 
+
+===================================================================================
+
+Why do we use training scaler to transform testing data?
+
+Best explanation: https://sebastianraschka.com/faq/docs/scale-training-test.html
+
+ML ENCODING PROCESS
+
+Let's say I have trained data and my test data comes different in two ways
+1. It has some missing values
+2. It has different number of unique categories in categorical columns
+
+The model will fail in this scenario
+
+Prerequisites:
+1. No missing values
+2. Number of columns should be same
+
+Now let's say we had a categorical variable in training data Z with 10 unique categories
+We did one-hot encoding on training data and therefore it created 9 columns
+
+Now in testing data the variable Z only had 4 categories: It will create only 3 columns (n-1)
+
+The model will fail saying different number of columns in training and testing data.
+
+Solution? Actually, one-hot encoder takes care of this by creating equal columns and passing 0 in the
+ones not present in testing data
+To do this, we have to pass parameter : "ignore"
+OH_encoder = OneHotEncoder(handle_unknown='ignore', sparse=False)
+
+
+Also, we use Encoder fitted on training data and use "transform" to testing data. Read above link to know more why.
+Same for missing values. We fit the imputer or get mean/median from TRAINING data and then transform to test data

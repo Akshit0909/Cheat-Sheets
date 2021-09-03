@@ -1065,6 +1065,8 @@ so try: pip3 install pyinstaller
 
 NOTE: pip3 and pyinstaller has been flagged by ey for python installer on ey system so pyinstaller command won't work
 Try it on conda environment and it will work
+
+pyinstaller Sox_Sample_07JUN21_AR_5.py --onefile --add-data "filesrequired;filesrequired" --windowed --icon=eylogo.ico
 =================================================================================================
 
 PYTHON INSTALl
@@ -1532,5 +1534,75 @@ float(a) //This gives value error
 a = '15.01   `
 float(a) //This does not
 
+========================================================================================================
+
+GROUP BY asindex = False
+
+https://stackoverflow.com/questions/41236370/what-is-as-index-in-groupby-in-pandas
+
+When using the group by function, as_index can be set to true or false depending on if you want the column by which you 
+grouped to be the index of the output.
+
+import pandas as pd
+table_r = pd.DataFrame({
+    'colors': ['orange', 'red', 'orange', 'red'],
+    'price': [1000, 2000, 3000, 4000],
+    'quantity': [500, 3000, 3000, 4000],
+})
+new_group = table_r.groupby('colors',as_index=True).agg('count')
+print new_group
+output:
+
+        price  quantity
+colors                 
+orange      2         2
+red         2         2
+
+
+Now with as_index=False
+
+   colors  price  quantity
+0  orange      2         2
+1     red      2         2
+Note how colors is no longer an index when we change as_index=False
+
+
+========================================================================================================
+
+pls re-read the documentation, by-definition you are chain indexing here when you specify inplace=True.
+
+idiomatically you should do this
+==Solution
+1. Assign Back: df['column_a'] = df['column_a].fillna(df2['column_b'])
+2. Use Dictionary(preferred)= df.fillna({'column_a': 0, 'column_b': 0}, inplace=True)
+
+When we do
+df['column_a'].fillna('a value', axis = 0 , inplace = True)
+It gives this error and won't even replace the value
+
+SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame. See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  self._update_inplace(new_data)
+
+
+WHY IS THIS HAPPENING AND WHAT IS THIS ERROR?
+When we do this
+df['column_a'].fillna('a value', axis = 0 , inplace = True)
+1. It creates a new separate COPY of df['column_a'] and changes the value in that
+2. That copy is not assigned to any variable
+3. That's why the original dataframe/columns doesn't get changed
+
+SOLUTION DETAILS: https://stackoverflow.com/questions/41207160/solving-a-value-is-trying-to-be-set-on-a-copy-of-a-slice-from-a-dataframe/41207238
+ERROR DETAILS - GENERAL: https://stackoverflow.com/questions/20625582/how-to-deal-with-settingwithcopywarning-in-pandas
+PANDAS DOCUMENTATION: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.fillna.html
+DEEP/SHALLOW COPY: https://www.geeksforgeeks.org/difference-between-shallow-copy-vs-deep-copy-in-pandas-dataframes/
+
 =========================================================================================================
 LOGS: OOPS
+
+
+1. [GCR GAAP Code 0CS_VERSION] 001 002
+2. 11 filter in rl4 in both files
+3. comparison in usd amt
+4. rl4 rl5 profit centre usd amt
+5. group by rl4 rl5 profitcentre
