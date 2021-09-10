@@ -1598,6 +1598,259 @@ PANDAS DOCUMENTATION: https://pandas.pydata.org/pandas-docs/stable/reference/api
 DEEP/SHALLOW COPY: https://www.geeksforgeeks.org/difference-between-shallow-copy-vs-deep-copy-in-pandas-dataframes/
 
 =========================================================================================================
+HOW TO FILL EMPTY DATA FRAME IN A LOOP
+https://stackoverflow.com/questions/28056171/how-to-build-and-fill-pandas-dataframe-from-for-loop/42670389
+
+==Way 1: List and Dictionary
+d = []
+for i in range(0,3):
+	d.append(
+	{'Col1' : 'Val1',
+	 'Col2' : 'Val2'}
+			)
+
+pd.DataFrame(d)
+
+NOTE: Doing this
+d.append
+(
+..
+)
+
+will give empty list due to syntax problem
+
+==Way 2: Make a list of tuples with your data and then create a DataFrame with it:
+
+d = []
+for p in game.players.passing():
+    d.append((p, p.team, p.passer_rating()))
+
+pd.DataFrame(d, columns=('Player', 'Team', 'Passer Rating'))
+
+==Way 3: Dict, Zip
+What does zip do ?
+https://www.geeksforgeeks.org/zip-in-python/
+
+The purpose of Python zip() method is to map the similar index of multiple containers so that 
+they can be used just using as single entity. 
+
+#This is basically same as first method
+dict(zip(['First Name', 'Second Name', 'Company'], ['Akshit', "Miglani", 'EY']))
+O/P: {'First Name': 'Akshit', 'Second Name': 'Miglani', 'Company': 'EY'}
+list_of_dict = [above_dict]
+pd.DataFrame(list_of_dict)
+
+
+==Way 4: List Dict
+https://www.geeksforgeeks.org/create-pandas-dataframe-from-lists-using-zip/
+
+
+s = list(zip(['Akshit'], ["Miglani"], ['EY']))
+pd.DataFrame(s, columns = ['First Name', 'Second Name', 'Company'])
+
+EXAMPLE 2:
+# List1
+Name = ['tom', 'krish', 'nick', 'juli']
+  
+# List2
+Age = [25, 30, 26, 22]
+  
+# get the list of tuples from two lists.
+# and merge them by using zip().
+list_of_tuples = list(zip(Name, Age))
+  
+# Assign data to tuples.
+list_of_tuples 
+
+# Converting lists of tuples into
+# pandas Dataframe.
+df = pd.DataFrame(list_of_tuples, columns = ['Name', 'Age'])
+
+=========================================================================================================
+AGGREGATION WITH GROUP By
+
+CASE :
+pd.DataFrame(
+{'Column1' : ['A','A','A','B','B'],
+'Column2' : ['PASS', 'FAIL', 'TENTATIVE','PASS','TENTATIVE']})
+
+I have this dataframe and I want to check whether there is any row with "FAIL" in Column2 WITHIN EACH GROUP.
+If there is any row with 'FAIL' I want to return 'FAIL' for that entire group.
+
+What is a good way to do this?
+
+SOLX:
+
+Crêpe — Yesterday at 4:41 PM
+if you want the answer per group:
+(df['Column2'] == 'FAIL').groupby(df['Column1']).any()
+
+if you want the answer per row:
+df['group_fail'] = (df['Column2'] == 'FAIL').groupby(df['Column1']).transform('any')
+
+no, because they share the same index
+(df['Column2'] == 'FAIL')
+don't just return a dumb list of true and false, but a pandas series
+which means it comes with an index
+that happen to match the initial dataframe
+and the groupby knows which index are grouped together because I pass df['Column1'] which is also a Series with the same index
+if you had an index mismatch it would fail
+people aggregating columns to perform groupby operation, do this either out of ignorance, or to be sure the index are always in sync
+(also because the groupby API allows you to do it :D)
+
+as for the any.... it's the same as any where in pandas or python
+in this case it's just an aggregation function
+if your group has a True value, it'll return True, otherwise False
+df.groupby('Column1')['Column2'].agg(lambda x: x=='FAIL').map(any)
+
+this is another way to do it, but that could be slower (not sure)
+
+
+when you call any from a DataFrameGroupBy or SeriesGroupBy object, you're using the any method from those objects, it performs operation on an aggregate
+if you use my last snippet, it's python's default any function
+the aggregation is handled by the .agg function
+and it produces arrays of True/False for each group
+I think my first snippet should be faster because it's pushing the computation off to numpy
+
+
+https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.GroupBy.any.html
+
+the groupby was applied on the True/False series
+
+
+MORE :
+
+'ALL PASS' = PASS
+'ANY FAIL' = FAIL
+'PASS OR TENT' = TENT
+
+
+the simpler way would be to just convert FAIL to 0, TENT to 1 and PASS to 2, then do a groupby, and a min
+
+(df['Column2'].astype('category').cat.reorder_categories(['FAIL','TENTATIVE','PASS'], ordered=True)
+              .groupby(df['Column1']).min())
+			  
+			  
+==SOLUTION 2
+
+https://stackoverflow.com/questions/27298178/concatenate-strings-from-several-rows-using-pandas-groupby
+
+
+
+=========================================================================================================
+
+GROUP BY SIZE() -- GET EASY COUNT
+
+https://stackoverflow.com/questions/19384532/get-statistics-for-each-group-such-as-count-mean-etc-using-pandas-groupby
+
+df.groupby(['col1','col2']).size()
+df.groupby(['col1', 'col2']).size().reset_index(name='counts')
+
+
+=========================================================================================================
+MULTIPLE CONDITIONS ON A ROW TO MAKE ANOTHER COLUMN
+
+https://stackoverflow.com/questions/27041724/using-conditional-to-generate-new-column-in-pandas-dataframe
+
+
+CASE:
+Hi all,
+I have a simple Python case and I just want to know if there's a better way to do it.
+
+Case:
+I have data in excel and a column 'class' which has text data. I have to create another column, assign it 
+values based on multiple conditions on the column.
+
+Example : class has a row with text "splunk malware cyber os" and if this row text has "splunk" and "cyber" : 
+assign it "A",  if only "splunk" : assign it "B" else "C"
+
+==SOLX
+
+has_splunk = df['class'].str.contains('splunk')
+has_cyber  = df['class'].str.contains('cyber')
+# default -> C
+df['column'] = 'C'
+# splunk -> B
+df.loc[df[has_splunk].index, 'column'] = 'B'
+# splunk + cyber -> A
+df.loc[df[has_cyber & has_splunk].index, 'column'] = 'A'
+
+
+==USING APPLY
+def assign_cat(row):
+    if 'splunk' and 'cyber' in row:
+        return 'A'
+    elif 'splunk' in row:
+        return 'B'
+    else:
+        return 'C'
+    
+print(df['class'].apply(assign_cat))
+
+
+WHY THIS IS NOT GOOD?
+when you use apply you're basically performing a loop
+when you use a bunch of filter and assignment you're not, so it's faster =)
+I can't be 100% of what's happening in pandas/numpy, but I'm suspecting pandas is just 
+kind of saving the processing up until you're actually requesting the value (aka lazy evaluation)
+
+
+and when you request the value, it kinds of pipe the processing for that specific value on the fly
+so instead of having a bunch of loops one after the other, it process the assign 'C' then assign 'B'  
+then assign 'A'  (for the relevant row) the moment you ask for that row
+
+
+PERFORMANCE
+np.select() > np.where() > df.loc[] > df.apply
+numpy > pandas indexing > apply(loops)
+
+==========================================================================================================
+WRITE MULTIPLE SHEETS IN EXCEL
+
+# ...
+writer = pd.ExcelWriter('final.xlsx')
+data.to_excel(writer,'original')
+
+# data.fillna() or similar.
+
+data.to_excel(writer,'result')
+writer.save()
+
+
+
+============================================================================================================
+
+MULTIPLE STRING SEARCH : DOES NOT CONTAIN IN DATA FRAME COLUMN
+https://stackoverflow.com/questions/17097643/search-for-does-not-contain-on-a-dataframe-in-pandas
+https://stackoverflow.com/questions/26577516/how-to-test-if-a-string-contains-one-of-the-substrings-in-a-list-in-pandas
+
+I am adding the framework to find multiple words and negate those from dataFrame.
+
+Here 'word1','word2','word3','word4' = list of patterns to search
+
+df = DataFrame
+
+column_a = A column name from from DataFrame df
+
+Search_for_These_values = ['word1','word2','word3','word4'] 
+
+pattern = '|'.join(Search_for_These_values)
+
+#This works because by default regex = True is contains
+result = df.loc[~(df['column_a'].str.contains(pattern, case=False)]
+
+
+=============================================================================================================
+
+FLATTEN OUT LIST
+
+https://stackoverflow.com/questions/952914/how-to-make-a-flat-list-out-of-a-list-of-lists
+
+
+
+
+
+============================================================================================================
 LOGS: OOPS
 
 
