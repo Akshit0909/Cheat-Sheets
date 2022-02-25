@@ -1567,8 +1567,23 @@ Now with as_index=False
 Note how colors is no longer an index when we change as_index=False
 
 
+== GROUP BY DROP NA ROWS
+
+Solution 1: When we are only grouping by one columns
+
+df.groupby('b', dropna=False).sum()
+
+Caveat: This doesn't work when grouping with multiple columns
+
+
+Solution 2: Hacky/ for multiple columns
+
+df.fillna('-1').groupby(['a','b']).sum()
+
+
 ========================================================================================================
 
+https://www.dataquest.io/blog/settingwithcopywarning/
 pls re-read the documentation, by-definition you are chain indexing here when you specify inplace=True.
 
 idiomatically you should do this
@@ -1775,6 +1790,10 @@ df.loc[df[has_splunk].index, 'column'] = 'B'
 # splunk + cyber -> A
 df.loc[df[has_cyber & has_splunk].index, 'column'] = 'A'
 
+loc is not a normal operation. It takes index of the rows and matches it accordingly. That's why we need index.
+Because it's basically indexing. We get indexes of "has_match" and then just locate rows by that.
+
+We're filtering the rows we want and then getting index of them
 
 ==USING APPLY
 def assign_cat(row):
@@ -1836,7 +1855,7 @@ Search_for_These_values = ['word1','word2','word3','word4']
 
 pattern = '|'.join(Search_for_These_values)
 
-#This works because by default regex = True is contains
+#This works because by default regex = True in contains
 result = df.loc[~(df['column_a'].str.contains(pattern, case=False)]
 
 
@@ -1847,10 +1866,183 @@ FLATTEN OUT LIST
 https://stackoverflow.com/questions/952914/how-to-make-a-flat-list-out-of-a-list-of-lists
 
 
+============================================================================================================
+
+def some_function(df, some_dict, test_name):
+  if test_name == "A":
+    #Do something to df
+    return df
+  if test_name == "B":
+    #Do something to some_dict. Here df is not needed
+    return some_dict
+	
+Do the below instead:
+
+Why?
+If you add 17 tests in the function, now your function has at least 18 arguments, while someone calling the function might only need two,
+these are staples of bad design. You'd have to manually make sure the different branches of the function don't influence each other.
+
+The single-responsibility principle (SRP) is a computer-programming principle that states that every module, class or function in a 
+computer program should have responsibility over a single part of that program's functionality, and it should encapsulate that part.
+
+def test_A(df):
+  #do somethingf to df
+  return df
+def test_B(some_dict):
+  #do something to some_dict
+  return some_dict
+tests = {"A": test_A, "B": test_B}
+
+# somewhere in your code where you want to get a function by name
+tests["A"](df)
+
+
+============================================================================================================
+GROUP BY DataFrame by a Column and Concatenate to a LIST
+https://www.geeksforgeeks.org/how-to-group-dataframe-rows-into-list-in-pandas-groupby/
+https://stackoverflow.com/questions/27298178/concatenate-strings-from-several-rows-using-pandas-groupby
+
+OPTION 1:
+df.groupby("column")["value_column"].apply(lambda row: [",".join(row)]).reset_index()
+
+PROBLEM with this: It makes up a list like ['A, B, C, D'] but we want ['A', 'B', 'C', 'D']
+
+OPTION 2:
+df.groupby("column")["value_column"].apply(list).reset_index()
+
+This does the job
+
+OPTION 3:
+df = df.groupby('column').agg({'value_column': lambda x: list(x)})
+  
+
 
 
 
 ============================================================================================================
+MUTATION IN PYTHON
+
+dct = {'a' : [1,2,3], 'b' : [4,5,6]}
+
+for k,v in dct.items():
+	v = 'o_o'
+	print(k, v)
+
+a [1,2,3]
+b [4,5,6]
+
+for k,v in dct.items():
+	v.append('o_o')
+	print(k, v)
+	
+a [1,2,3, 'o_o']
+b [4,5,6, 'o_o']
+
+===========================================================================================================
+If I have a list_A = ["Akshit", "Akon"] and Salary_Sources as = (["Investment", "Job", "Rent], ["Singing", "Property"])
+
+I want to create a dataframe which has 3 rows for Akshit and 2 rows for Akon
+
+df = pd.DataFrame(dict(zip(['Person Name', 'Salary Sources'], (list_A, Salary_Sources))))
+
+============================================================================================================
+If I have comma separated values in a column of a dataframe and I want to create multiple rows for those values
+
+df.explore('column_name')
+
+Requirement: The values in column_name have to be in a list format: ['A', 'B']
+
+What if I have values like A, B
+
+df['column_name'] = df['column_name'].apply(lambda row: row.split(','))
+
+=============================================================================================================
+TRANSPOSE (ROWS TO COLUMNS)
+
+https://stackoverflow.com/questions/44678829/how-to-transpose-dataframe-columns-into-rows-in-pandas
+
+pd.melt(df, id_vars=['col1','col2','col3'])
+
+pd.melt(frame, id_vars=None, value_vars=None, var_name=None, value_name='value', col_level=None, ignore_index=True)
+
+id_vars: take columns which need to be retained
+value_vars: tuple, list, or ndarray, optional
+Column(s) to unpivot. If not specified, uses all columns that are not set as id_vars.
+
+==OPTION 2
+
+df.set_index(['country','year','perc']).stack().reset_index()
+
+=============================================================================================================
+Deep copy(a new ID/object) of a dictionary
+https://stackoverflow.com/questions/5105517/deep-copy-of-a-dict-in-python
+
+my_copy = {key: value[:] for key, value in my_dict.items()}
+
+id(my_copy['a'])
+140190444024176 (different to my_dict)
+
+===============================================================================================================
+Converting Strings to Dates | Dealing with multiple date formats in a date column
+
+https://stackoverflow.com/questions/466345/converting-string-into-datetime
+
+strptime and strftime are from datetime under datetime module(datetime.datetime)
+Remember this and you didn't need to get confused in datetime conversion again.
+
+String to datetime object = strptime
+
+datetime object to other formats = strftime
+
+datetime.datetime.strptime(date, '%b %d %Y %I:%M%p')
+
+==What if I have multiple dates in a column?
+pd.todatetime(series)
+
+pd.todatetime.strptime(date) //don't provide any format. It will automatically detect
+
+================================================================================================================
+
+How to do Cross Join in Python
+
+https://stackoverflow.com/questions/34161978/pandas-two-dataframe-cross-join
+
+Normally we do
+pd.merge(df1, df2, on = 'key', how ='left/inner/outer')
+
+left: Retain all rows of left and match
+inner: Retain common rows
+outer: stack both common rows and non-common rows
+cross: cross-product
+
+OUTER JOIN IS NOT SAME AS CROSS Join
+
+So how then do I perform Cross join?
+
+df1['key'] = 0
+df2['key'] = 0
+
+df1.merge(df2, on='key', how='outer')
+
+Here, 'how = ' doesn't matter any of 'left/inner' will result in same.
+
+
+===============================================================================================================
+
+Save New Excel Sheet in existing file
+
+https://www.thiscodeworks.com/python-how-to-save-a-new-sheet-in-an-existing-excel-file-using-pandas-stack-overflow-python/6047e234b5a8500014ae3572
+
+Combine multiple CSV files which are present in the same folder
+https://www.freecodecamp.org/news/how-to-combine-multiple-csv-files-with-8-lines-of-code-265183e0854/
+
+extension = 'csv'
+all_filenames = [i for i in glob.glob(r'Data\Splunk_AllActivity\*.{}'.format(extension))]
+df_check = pd.concat(pd.read_csv(file, low_memory=False).convert_dtypes() for file in all_filenames) 
+
+
+
+================================================================================================================
 LOGS: OOPS
 
 

@@ -69,3 +69,9 @@ be a whole number (if a match is found) or an error (if a match is not found).
 ========================================================================================
 
 FIND SEARCH ARE SAME EXCEPT FIND IS CASE SENSITIVE
+
+==============================================================================================
+
+FILL SERIES USING KEYBOARD
+
+ALT H F I S ENTER

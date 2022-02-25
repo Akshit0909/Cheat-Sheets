@@ -312,6 +312,11 @@ One hot encoding(0/1 sparse data : for each category):
 
 Why do we use training scaler to transform testing data?
 
+We use fit_transform() on the train data so that we learn the parameters of scaling on the train data and in the 
+same time we scale the train data. We only use transform() on the test data because we use the scaling paramaters 
+learned on the train data to scale the test data.
+
+
 Best explanation: https://sebastianraschka.com/faq/docs/scale-training-test.html
 
 ML ENCODING PROCESS
