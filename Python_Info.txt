@@ -1945,6 +1945,25 @@ I want to create a dataframe which has 3 rows for Akshit and 2 rows for Akon
 
 df = pd.DataFrame(dict(zip(['Person Name', 'Salary Sources'], (list_A, Salary_Sources))))
 
+IMPORTANT NOTE HERE: List_A and Salary_Sources (list_A, Salary_Sources) HAVE TO BE LISTS otherwise it will throw an error:
+Cannot interpret '<attribute 'dtype' of 'numpy.generic' objects>' as a data type
+OR
+"ValueError: If using all scalar values, you must pass an index"
+
+MORE: https://stackoverflow.com/questions/17839973/constructing-pandas-dataframe-from-values-in-variables-gives-valueerror-if-usi
+
+
+ALTERNATIVE WAY TO MAKE DF FROM DICTIONARY
+
+https://stackoverflow.com/questions/42869544/dictionary-of-lists-to-dataframe
+d={
+    'key1': [10, 100.1, 0.98, 1.2],
+    'key2': [72.5],
+    'key3': [1, 5.2, 71.2, 9, 10.11, 12.21, 65, 7]
+}
+
+df=pd.DataFrame.from_dict(d,orient='index').transpose()
+
 ============================================================================================================
 If I have comma separated values in a column of a dataframe and I want to create multiple rows for those values
 
@@ -2043,6 +2062,62 @@ df_check = pd.concat(pd.read_csv(file, low_memory=False).convert_dtypes() for fi
 
 
 ================================================================================================================
+MULTIPLE SPLIT
+https://stackoverflow.com/questions/4998629/split-string-with-multiple-delimiters-in-python
+
+string = "Akshit_Miglani Washington State"
+I need four words from this string. 
+If I split by "_", I get two words ["Akshit", "Miglani Washington State"]
+If I split by " ", I get three words ["Akshit_Miglani", "Washington", "State"]
+
+SOLUTION
+re.split(" _ | \s ", string) -> ["Akshit", "Miglani", "Washington", "State"]
+
+====================================================================================================================
+DEBUGGING
+
+When I do pd.to_excel(..) to debug, it's not quite accurate.
+REASON: If I have a list in real dataframe ['a', 'b'] and I write its excel, everything will get changed to string(by design python)
+It will be "['a', 'b']"
+
+
+====================================================================================================================
+JOIN Interview Question
+
+d1 = pd.DataFrame([1]*10, columns = ["id"])
+d2 = pd.DataFrame([1]*3, columns = ["id"])
+
+pd.merge(d1, d2, on = 'id', how = 'inner')
+
+Same output for all cases(inner/left/right)
+
+======================================================================================================================
+
+https://stackoverflow.com/questions/53264809/list-object-has-no-attribute-lower-in-python
+
+I had a list present in dataframe column
+When I extracted the list using 
+df.loc[df[column] == value, 'token_list'] //This results in a series
+df.loc[df[column] == value, 'token_list'].values[0] //This results in a list
+
+When I did
+store_list = df.loc[df[column] == value, 'token_list'].values[0]
+store_list = [i.strip().lower() for i in store_list] //It said that: AttributeError: 'list' object has no attribute 'strip'
+
+When I did
+store_list = [i.strip() for i in store_list]
+store_list = [.lower() for i in store_list] //IT WORKED
+
+======================================================================================================================
+
+==SELECTING MULTIPLE TEXT IN VSCODE
+
+All text with same words : CTRL + SHIFT + L
+Next text: CTRL + D
+======================================================================================================================
+https://www.geeksforgeeks.org/python-remove-empty-strings-from-list-of-strings/
+https://www.geeksforgeeks.org/python-convert-a-string-representation-of-list-into-list/	
+
 LOGS: OOPS
 
 

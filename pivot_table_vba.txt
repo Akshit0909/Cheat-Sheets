@@ -1,0 +1,142 @@
+Function GeneratePivot(table_name As String, pop_type As String)
+
+    Dim PSheet As Worksheet
+    Dim DSheet As Worksheet
+    Dim PCache As PivotCache
+    Dim PTable As PivotTable
+    Dim PRange As Range
+    Dim LastRow As Long
+    Dim LastCol As Long
+    
+    'Create PivotTables
+    
+    'Insert a New Blank Worksheet
+    On Error Resume Next
+    Application.DisplayAlerts = False
+    Worksheets(pop_type).Delete
+    Sheets.Add Before:=ActiveSheet
+    ActiveSheet.Name = pop_type
+    Application.DisplayAlerts = True
+    Set PSheet = Worksheets(pop_type)
+    Set DSheet = Worksheets("Aggregations")
+    
+    'Define Data Range
+    LastRow = DSheet.Cells(Rows.Count, 1).End(xlUp).Row
+    LastCol = DSheet.Cells(1, Columns.Count).End(xlToLeft).Column
+    Set PRange = DSheet.Cells(1, 1).Resize(LastRow, LastCol)
+    
+    
+    'Define Pivot Cache
+    Set PCache = ActiveWorkbook.PivotCaches.Create _
+    (SourceType:=xlDatabase, SourceData:=PRange). _
+    CreatePivotTable(TableDestination:=PSheet.Cells(5, 2), _
+    TableName:=table_name)
+    
+    'Insert Blank Pivot Table
+    Set PTable = PCache.CreatePivotTable _
+    (TableDestination:=PSheet.Cells(1, 1), TableName:=table_name)
+    
+    'Insert Row Fields
+    With ActiveSheet.PivotTables(table_name).PivotFields("Class")
+    .Orientation = xlRowField
+    .Position = 1
+    End With
+    
+    With ActiveSheet.PivotTables(table_name).PivotFields("Control")
+    .Orientation = xlRowField
+    .Position = 2
+    End With
+    
+    With ActiveSheet.PivotTables(table_name).PivotFields("test_suite")
+    .Orientation = xlRowField
+    .Position = 3
+    End With
+    
+    With ActiveSheet.PivotTables(table_name).PivotFields("Test")
+    .Orientation = xlRowField
+    .Position = 4
+    End With
+    
+    'Insert Column Fields
+    'With ActiveSheet.PivotTables("ITRC_Applications").CubeFields("[Table1].[ITRC_Status]")
+    '.Orientation = xlColumnField
+    '.Position = 1
+    'End With
+    
+    'Insert Data Field
+    With ActiveSheet.PivotTables(table_name).PivotFields("Denominator")
+    .Orientation = xlDataField
+    .Position = 1
+    .Function = xlSum
+    .NumberFormat = "#,##0"
+    .Name = "Denominator "
+    End With
+    
+    With ActiveSheet.PivotTables(table_name).PivotFields("Numerator")
+    .Orientation = xlDataField
+    .Position = 2
+    .Function = xlSum
+    .NumberFormat = "#,##0"
+    .Name = "Numerator "
+    End With
+    
+    With ActiveSheet.PivotTables(table_name).PivotFields("Compliance %")
+    .Orientation = xlDataField
+    .Position = 3
+    .Function = xlSum
+    .NumberFormat = "#,##0"
+    .Name = "Numerator "
+    End With
+    
+    'Filter out unwanted device types
+    
+    ActiveSheet.PivotTables(table_name).PivotFields("Population Type").Orientation = xlPageField
+    ActiveSheet.PivotTables(table_name).PivotFields("Skip Test").Orientation = xlPageField
+    ActiveSheet.PivotTables(table_name).PivotFields("Test Applicability").Orientation = xlPageField
+    
+    
+    With ActiveSheet.PivotTables(table_name).PivotFields("Population Type")
+    .ClearAllFilters
+    .CurrentPage = pop_type
+    End With
+    
+    With ActiveSheet.PivotTables(table_name).PivotFields("Skip Test")
+    .ClearAllFilters
+    .CurrentPage = "N"
+    End With
+    
+    With ActiveSheet.PivotTables(table_name).PivotFields("Test Applicability")
+    .ClearAllFilters
+    .CurrentPage = "Yes"
+    End With
+    
+    With ActiveSheet.PivotTables(table_name)
+        For Each pvtFld In .PivotFields
+            pvtFld.Subtotals(1) = False
+        Next pvtFld
+    End With
+    
+    With ActiveSheet.PivotTables(table_name)
+        .InGridDropZones = True
+        .RowAxisLayout xlTabularRow
+        .DisplayContextTooltips = False
+        .ShowDrillIndicators = False
+    End With
+    
+    
+
+End Function
+
+
+Sub Create_Summary_Pivots()
+
+Call GeneratePivot("server_testing", "Server Testing")
+Call GeneratePivot("nw_testing", "Network Testing")
+Call GeneratePivot("ww_testing", "Windows workstation Testing")
+
+End Sub
+
+
+
+
+
